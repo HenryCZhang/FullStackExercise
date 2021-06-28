@@ -14,25 +14,29 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var Students = /** @class */ (function () {
-    function Students(name, age, gender, nationality) {
+    function Students(name, age, nationality) {
         this.name = name;
         this.age = age;
-        this.gender = 'female';
+        this.gender = 'female'; //as requested 
         this.nationality = nationality;
     }
     Students.prototype.getNationality = function () {
         return this.nationality;
     };
+    Students.prototype.getGender = function () {
+        return this.gender;
+    };
     return Students;
 }());
 var Undergraduates = /** @class */ (function (_super) {
     __extends(Undergraduates, _super);
-    function Undergraduates(name, age, gender, nationality, GPA) {
-        var _this = _super.call(this, name, age, gender, nationality) || this;
+    function Undergraduates(name, age, nationality, GPA) {
+        var _this = _super.call(this, name, age, nationality) || this;
         _this.GPA = GPA;
         return _this;
     }
     return Undergraduates;
 }(Students));
-var newUndergrate = new Undergraduates('Stephen', 23, 'male', 'Canada', 4.0);
+var newUndergrate = new Undergraduates('Stephen', 23, 'Canada', 4.0);
 console.log("nationality: " + newUndergrate.getNationality());
+console.log("gender: " + newUndergrate.getGender());
