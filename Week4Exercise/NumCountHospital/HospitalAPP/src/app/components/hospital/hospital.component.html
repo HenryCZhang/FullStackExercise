@@ -1,0 +1,41 @@
+<p>hospital component!</p>
+
+<!-- Patient table -->
+<p [style.background-color]='bgColor'>Patients:</p>
+<div class="patientsTb">
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Illness</th>
+    </tr>
+    <tr *ngFor ='let patient of patients' >
+        <td>{{patient.name}}</td>
+        <td>{{patient.illness}}</td>
+    </tr>
+    <tr>
+        <td colspan="2">total number: {{patients.length}}</td>
+    </tr>
+</table>
+</div>
+
+<!-- Doctor table -->
+<p [style.background-color]='bgColor'>Doctors:</p>
+<div class="doctorsTb">
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Specialization</th>
+    </tr>
+    <tr *ngFor ='let doctor of doctors' >
+        <td>{{doctor.name}}</td>
+        <td>{{doctor.specialization}}</td>
+    </tr>
+    <tr>
+        <td colspan="2">total number: {{doctors.length}}</td>
+    </tr>
+</table>
+</div>
+
+<h1>Total number of patients and doctors: {{patients.length+doctors.length}}</h1>
+
+
