@@ -1,0 +1,24 @@
+<p>task works!</p>
+<div class="card">
+    <div class="card-header text-light" [ngClass]="{'bg-secondary':task.priority_level==='Low',
+                                                    'bg-dark':task.priority_level==='Medium', 
+                                                    'bg-warning':task.priority_level==='High',
+                                                    'bg-danger':task.priority_level==='Critical'}">
+
+    <h4 class="card-title">{{task.title}}</h4>                                          
+    </div>
+    <div class="card-body bg-primary text-white">
+        <p>{{task.description}}</p>
+        <hr>
+        <h3>{{task.date | date}}</h3>
+        <hr>
+        <h3>{{task.time | date:'mediumTime'}}</h3>
+        <hr>
+        <h3>{{task.priority_level}}</h3>
+        <hr>
+        <h3>{{task.category}}</h3>
+        <hr>
+        <h2>{{task.progress_level}}</h2>
+        <hr>
+    </div>
+</div>
