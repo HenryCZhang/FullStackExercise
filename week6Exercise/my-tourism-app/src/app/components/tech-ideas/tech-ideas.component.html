@@ -1,0 +1,71 @@
+<div class="pageWrapper">
+<div class="title">Share your great ideas!</div>
+<form [formGroup]="techIdeasForm">
+    <!-- Name -->
+    <div>
+        <label for='username'><span class="label">Name:</span></label>
+        <input type='text' id='userName' formControlName="name">
+
+        <div *ngIf="nameFormControl.touched && nameFormControl.errors?.required" >
+            <div class='alert'>Please insert your name</div>
+        </div>
+        
+        <div *ngIf="nameFormControl.touched && nameFormControl.errors?.minlength" >
+            <div class='alert'>Your name should be more than 2 letters</div>
+        </div>
+
+        <div *ngIf="nameFormControl.touched && nameFormControl.value=='tourist'">
+            <div class='alert'>Your name cannot be the word tourist</div>
+        </div>
+    </div>
+    <br>
+    <!-- Email -->
+    <div>
+        <label for='userEmail'><span class="label">E-mail: </span></label>
+        <input type='email' id='userEmail' formControlName="email">
+    </div>
+
+    <div *ngIf="emailFormControl.touched && emailFormControl.errors?.required" >
+        <div class='alert'>Please insert your email</div>
+    </div>
+    <br>
+    <!-- Age -->
+    <div>
+        <label for='userAge'><span class="label">Age: </span></label>
+        <input type='number' id='userAge' formControlName="age">
+    </div>
+    <br>
+    <!-- Target City -->
+    <div>
+        <label for='targetCity'><span class="label">Target City: </span></label>
+        <select id='targetCity' ngModel name="city">
+            <option value='{{cities}}' *ngFor='let city of cities'>{{city}}</option>
+        </select>
+    </div>
+
+    <div *ngIf="cityFormControl.touched && cityFormControl.value==null" >
+        <div class='alert'>Please choose a city</div>
+    </div>
+    <!-- Brief about your technical idea -->
+    <div id="brief-idea">
+        <label for='brief'><span class="label">Brief about your technical idea:</span></label><br>
+        <textarea rows="4" cols="50" id="brief" formControlName="brief"></textarea>
+    </div>
+
+    <div *ngIf="briefFormControl.touched && briefFormControl.errors?.required" >
+        <div class='alert'>Please insert a brief about your project</div>
+    </div>
+    <div *ngIf="briefFormControl.touched && briefFormControl.errors?.minlength" >
+        <div class='alert'>Your message should be more than 99 characters</div>
+    </div>
+    <div *ngIf="briefFormControl.touched && briefFormControl.value=='nothing'">
+        <div class='alert'>Your project description cannot be the word 'nothing'</div>
+    </div>
+
+
+    <button type="button" (click)="onClick()" >
+        <div class='buttonText'>Submit</div>
+    </button>
+    <!-- [disabled]="techIdeasForm.invalid" -->
+</form>
+</div>

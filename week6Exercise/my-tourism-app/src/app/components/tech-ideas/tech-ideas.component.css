@@ -1,0 +1,51 @@
+*{
+    margin: 0;
+}
+
+.title{
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    font-family: 'Brush Script MT';
+    background-color: #BAF2D8;
+    padding:20px;
+    margin-bottom: 80px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.pageWrapper{
+    margin-top: 30px;
+}
+
+form{
+    margin-left: 40%;
+    margin-right: 35%;
+    background-color: #BAF2D8;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.alert{
+    color: red;
+    font-style: italic;
+}
+
+button{
+    background-color: white;
+    border: #BAF2D8;
+    border-radius: 10px;
+    font-size: large;
+}
+
+label :hover{
+    font-size: x-large;
+}
+
+#brief-idea{
+    margin-top: 20px;
+}
+
+button :hover{
+    font-size: x-large;
+}

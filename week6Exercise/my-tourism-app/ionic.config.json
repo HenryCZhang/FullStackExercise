@@ -1,0 +1,10 @@
+{
+  "defaultProject": "my-tourism-app",
+  "projects": {
+    "my-tourism-app": {
+      "name": "my-tourism-app",
+      "integrations": {},
+      "type": "angular"
+    }
+  }
+}

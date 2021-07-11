@@ -1,0 +1,32 @@
+nav{
+    position:fixed;
+    width:100%;
+    padding-top:10px;
+    padding-bottom: 10px;
+    top:0%;
+    left: 0%;
+    text-align: center;
+    background-color: #BAF2D8;
+}
+
+a{
+    padding:5px 15px;
+    margin: 0 5px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+a:hover{
+    background-color: orange;
+}
+
+footer{
+    position:fixed;
+    width:100%;
+    padding-top:10px;
+    padding-bottom: 10px;
+    bottom:0%;
+    left: 0%;
+    text-align: center;
+    background-color: #BAF2D8;
+}

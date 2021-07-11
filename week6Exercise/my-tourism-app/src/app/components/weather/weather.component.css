@@ -1,0 +1,35 @@
+.tableWrapper{
+    margin-left: 25%;
+    margin-top: 80px;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+caption{
+    padding: 10px;
+    font-size: large;
+    background-color: #BAF2D8;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    margin-top: 30px;
+    font-style:italic;
+}
+
+.EM{
+    padding:10px;
+}
+
+.num{
+    padding-left: 50px;
+}
+
+.suggestionTxt{
+    font-size: 20px;
+    background-color: #BAF2D8;
+    text-align: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}

@@ -1,0 +1,42 @@
+<div class="bgImage">
+    <div class="tableWrapper">
+        <div *ngFor="let weather of weatherData" >
+            <table>
+                <caption>Weather in {{weather.name}}</caption>
+                <tr>
+                    <th colspan="2">Spring</th>
+                    <th colspan="2">Summer</th>
+                    <th colspan="2">Autumn</th>
+                    <th colspan="2">Winter</th>
+                </tr>
+                <tr>
+                    <td class="EM">Spring Morning</td>
+                    <td class="EM">Spring Evening</td>
+                    <td class="EM">Summer Morning</td>
+                    <td class="EM">Summer Evening</td>
+                    <td class="EM">Autumn Morning</td>
+                    <td class="EM">Autumn Evening</td>
+                    <td class="EM">Winter Morning</td>
+                    <td class="EM">Winter Evening</td>
+                </tr>
+                <tr>
+                    <td class='num'>{{weather.springM}}</td>
+                    <td class='num'>{{weather.springN}}</td>
+                    <td class='num'>{{weather.summerM}}</td>
+                    <td class='num'>{{weather.summerN}}</td>
+                    <td class='num'>{{weather.autumnM}}</td>
+                    <td class='num'>{{weather.autumnN}}</td>
+                    <td class='num'>{{weather.winterM}}</td>
+                    <td class='num'>{{weather.winterN}}</td>
+                </tr>
+                <tr>
+                    <td class='suggestionTxt' colspan='8'>
+                        The most suitable time to enjoy your holiday in {{weather.name}} would be between {{weather.visitFrom}} and {{weather.visitTo}}
+                    </td>
+                </tr>
+            </table>
+           
+        </div>
+    </div>
+</div>
+
