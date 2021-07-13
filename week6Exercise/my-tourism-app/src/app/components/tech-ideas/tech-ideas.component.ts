@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { avoidWord } from 'src/app/custom-validators/avoid-word';
 import { GetCityNamesService } from 'src/app/services/get-city-names.service';
 
 @Component({
@@ -14,9 +15,8 @@ export class TechIdeasComponent implements OnInit {
   techIdeasForm;
 
   constructor(private service:GetCityNamesService,private builder:FormBuilder) {
-    // this.cities = this.service.getNames();
       this.techIdeasForm = builder.group({
-      name:["",[Validators.required,Validators.minLength(3)]],//no prohibited()
+      name:["",[Validators.required,Validators.minLength(3),avoidWord(RegExp("tourist"))]],//avoidWord(): custom validator
       age:[""],
       email:["",[Validators.required]],
       city:["",[Validators.required]],

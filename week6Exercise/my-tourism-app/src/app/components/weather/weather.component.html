@@ -2,7 +2,7 @@
     <div class="tableWrapper">
         <div *ngFor="let weather of weatherData" >
             <table>
-                <caption>Weather in {{weather.name}}</caption>
+                <caption>Weather in <span class='city-name'>{{weather.name}}</span></caption>
                 <tr>
                     <th colspan="2">Spring</th>
                     <th colspan="2">Summer</th>

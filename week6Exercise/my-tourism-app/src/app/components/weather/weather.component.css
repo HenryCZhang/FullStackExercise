@@ -8,6 +8,10 @@ table, th, td {
     border-collapse: collapse;
 }
 
+.city-name{
+    font-weight: bold;
+}
+
 caption{
     padding: 10px;
     font-size: large;

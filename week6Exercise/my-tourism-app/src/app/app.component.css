@@ -20,6 +20,10 @@ a:hover{
     background-color: orange;
 }
 
+.active{
+    background-color: orange;
+}
+
 footer{
     position:fixed;
     width:100%;
