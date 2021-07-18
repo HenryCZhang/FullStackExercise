@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GoalService } from 'src/app/services/goal.service';
 import { TaskService } from 'src/app/services/task-service.service';
 
 @Component({
@@ -8,15 +9,21 @@ import { TaskService } from 'src/app/services/task-service.service';
 })
 export class AchievementsPage {
 
-  tasks;//array of all done tasks
+  tasks;//array of all completed tasks
+  goals;//array of all completed goals
 
-  constructor(private service:TaskService) {
-  
+  constructor(private taskService:TaskService,private goalService:GoalService) {
   }
 
   ionViewWillEnter(){
-    this.service.get_done_tasks().subscribe((result)=>{
+    this.taskService.get_done_tasks().subscribe((result)=>{
       this.tasks=result;
+    },(err)=>{
+      console.log(err);
+    })
+
+    this.goalService.get_done_goals().subscribe((result)=>{
+      this.goals=result;
     },(err)=>{
       console.log(err);
     })

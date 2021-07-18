@@ -8,7 +8,7 @@ import { Task } from '../interfaces/task';
 })
 export class TaskService {
 
-  taksID;
+  taskID;
   status;
 
   constructor(private http:HttpClient) { }
@@ -22,7 +22,7 @@ export class TaskService {
   }
   //not sure!!! - for updating the DB status
   check_task(){
-    return this.http.patch("http://localhost:1000/task/"+this.taksID,this.status);
+    return this.http.patch("http://localhost:1000/task/"+this.taskID,this.status);
   }
 
   get_done_tasks():Observable<Task[]>{
@@ -30,6 +30,6 @@ export class TaskService {
   }
 
   delete_task(){
-    return this.http.delete("http://localhost:1000/task/"+this.taksID);
+    return this.http.delete("http://localhost:1000/task/"+this.taskID);
   }
 }

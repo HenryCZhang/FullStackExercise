@@ -16,4 +16,14 @@
       <h2>Finished Date: {{task.date_of_end | date}}</h2>
     </ion-card-content>
   </ion-card>
+
+  <ion-card *ngFor="let goal of goals" color="warning">
+    <ion-card-header>
+      <ion-card-title>GOAL</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <h1>Description: {{goal.description}}</h1>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

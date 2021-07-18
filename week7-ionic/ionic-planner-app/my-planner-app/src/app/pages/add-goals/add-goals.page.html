@@ -5,5 +5,17 @@
 </ion-header>
 
 <ion-content>
+  <form [formGroup]='goalForm'>
 
+    <ion-item>
+      <ion-label position="stacked">Description:</ion-label>
+      <ion-textarea formControlName='description'></ion-textarea>
+    </ion-item>
+    <ion-item *ngIf="descriptionFormControl.touched && descriptionFormControl.errors?.required" color="danger">
+      This field is required
+    </ion-item>
+
+    <ion-button color='primary' (click)='onSubmit()' [disabled]='goalForm.invalid'>Submit</ion-button>  
+  </form>
 </ion-content>
+

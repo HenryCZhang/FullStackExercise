@@ -27,7 +27,7 @@ export class ToDoListPage implements OnInit {
   }
 
   async deletTask(task){
-    this.taskService.taksID = task.id; //get the current task id  - the key to success!!!
+    this.taskService.taskID = task.id; //get the current task id  - the key to success!!!
     this.taskService.delete_task().subscribe((result)=>{
       console.log(result);
     },(err)=>{

@@ -36,14 +36,14 @@ export class NotesPage implements OnInit {
   }
 
   async deletNote(note){
-    this.noteService.noteID = note.id; //get the current task id  - the key to success!!!
+    this.noteService.noteID = note.id; //get the current note id  - the key to success!!!
     this.noteService.delete_note().subscribe((result)=>{
       console.log(result);
     },(err)=>{
       console.log(err);
     })
     const toast = await this.toastController.create({
-      message: `Task: ${note.name} has been deleted ~ refresh to see changes`,
+      message: `Note: ${note.name} has been deleted ~ refresh to see changes`,
       duration: 2000
     });
     note.id=911;
