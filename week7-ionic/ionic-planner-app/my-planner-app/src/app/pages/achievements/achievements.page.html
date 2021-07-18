@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>achievements</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let task of tasks" color="success">
+    <ion-card-header>
+      <ion-card-title>TASK</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <h1>Name: {{task.name}}</h1>
+      <h1>Description: {{task.description}}</h1>
+      <h2>Finished Date: {{task.date_of_end | date}}</h2>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

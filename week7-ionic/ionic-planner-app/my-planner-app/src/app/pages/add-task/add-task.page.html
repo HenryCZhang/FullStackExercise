@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>add-task</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- task form -->
+  <form [formGroup]='taskForm'>
+
+    <ion-item>
+      <ion-label position="stacked">Name:</ion-label>
+      <ion-input formControlName='name'></ion-input>
+    </ion-item>
+    <ion-item *ngIf="nameFormControl.touched && nameFormControl.errors?.required" color="danger">
+      This field is required
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="stacked">Description:</ion-label>
+      <ion-textarea formControlName='description'></ion-textarea>
+    </ion-item>
+    <ion-item *ngIf="descriptionFormControl.touched && descriptionFormControl.errors?.required" color="danger">
+      This field is required
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="stacked">Start Date:</ion-label>
+      <ion-input type="datetime-local" formControlName='date_of_start'></ion-input>
+    </ion-item>
+    <ion-item *ngIf="startDateFormControl.touched && startDateFormControl.errors?.required" color="danger">
+      This field is required
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">End Date:</ion-label>
+      <ion-input type="datetime-local" formControlName='date_of_end'></ion-input>
+    </ion-item>
+      <ion-item *ngIf="endDateFormControl.touched && endDateFormControl.errors?.required" color="danger">
+      This field is required
+    </ion-item>
+
+    <ion-button color='primary' (click)='onSubmit()' [disabled]='taskForm.invalid'>Submit</ion-button>  
+  </form>
+  <!-- end of teask form -->
+</ion-content>

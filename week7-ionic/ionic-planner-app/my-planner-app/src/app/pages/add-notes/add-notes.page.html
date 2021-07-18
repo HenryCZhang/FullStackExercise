@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>add-notes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- note form -->
+  <form [formGroup]='noteForm'>
+
+    <ion-item>
+      <ion-label position="stacked">Name:</ion-label>
+      <ion-input formControlName='name'></ion-input>
+    </ion-item>
+    <ion-item *ngIf="nameFormControl.touched && nameFormControl.errors?.required" color="danger">
+      This field is required
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="stacked">Header:</ion-label>
+      <ion-textarea formControlName='header'></ion-textarea>
+    </ion-item>
+    <ion-item *ngIf="headerFormControl.touched && headerFormControl.errors?.required" color="danger">
+      This field is required
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="stacked">Details:</ion-label>
+      <ion-textarea formControlName='details'></ion-textarea>
+    </ion-item>
+    <ion-item *ngIf="detailsFormControl.touched && detailsFormControl.errors?.required" color="danger">
+      This field is required
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Importance:</ion-label>
+      <!-- <ion-input formControlName='importance'></ion-input> -->
+      <ion-select placeholder="Select One" formControlName='importance'>
+        <ion-select-option value="low">Low</ion-select-option>
+        <ion-select-option value="medium">Medium</ion-select-option>
+        <ion-select-option value="high">High</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button color='primary' (click)='onSubmit()' [disabled]='noteForm.invalid'>Submit</ion-button>  
+  </form>
+  <!-- end of note form -->
+</ion-content>

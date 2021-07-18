@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>notes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ <!-- Notes -->
+ <ion-card *ngFor="let note of notes" [ngClass]="{'green-color': note.id!=911, 'grey-color': note.id == 911}">
+  <ion-card-header>
+    <ion-card-subtitle>ID: {{note.id}}</ion-card-subtitle>
+    <ion-card-title>Name: {{note.name}}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <h2>Header: {{note.header}}</h2>
+    <h2>Details: {{note.details}}</h2>
+    <h2>Importance: {{note.importance}}</h2>
+  </ion-card-content>
+  <!-- delete button -->
+  <ion-button expand="block" color="danger" (click)='deletNote(note)' *ngIf="note.id != 911">Delete</ion-button>
+</ion-card>
+
+<!-- A button that navigates to the add-task page -->
+<a routerLink="/add-notes" routerLinkActive="active"><ion-button class='add-button' color='dark'>Add Note</ion-button></a>
+</ion-content>
