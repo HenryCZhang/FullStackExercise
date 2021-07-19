@@ -1,10 +1,15 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>notes</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+<!-- A button that navigates to the add-note page -->
+<a routerLink="/add-notes" routerLinkActive="active"><ion-button class='add-button' color='dark'>Add Note</ion-button></a>
  <!-- Notes -->
  <ion-card *ngFor="let note of notes" [ngClass]="{'green-color': note.id!=911, 'grey-color': note.id == 911}">
   <ion-card-header>
@@ -21,6 +26,4 @@
   <ion-button expand="block" color="danger" (click)='deletNote(note)' *ngIf="note.id != 911">Delete</ion-button>
 </ion-card>
 
-<!-- A button that navigates to the add-note page -->
-<a routerLink="/add-notes" routerLinkActive="active"><ion-button class='add-button' color='dark'>Add Note</ion-button></a>
 </ion-content>

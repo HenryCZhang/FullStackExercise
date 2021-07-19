@@ -20,9 +20,10 @@ export class TaskService {
   add_task(data){
     return this.http.post("http://localhost:1000/task",data);
   }
+
   //not sure!!! - for updating the DB status
-  check_task(){
-    return this.http.patch("http://localhost:1000/task/"+this.taskID,this.status);
+  check_task(taskId, status){
+    return this.http.patch("http://localhost:1000/task/"+taskId, {status}); // {status: status}
   }
 
   get_done_tasks():Observable<Task[]>{

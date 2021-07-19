@@ -37,7 +37,7 @@ app.patch('/task/:id',(req,res)=>{
     let id = parseInt(req.params.id);
     Task.findByPk(id).then((result)=>{
         console.log(result);
-        result.status = req.body.status; //not sure!!!
+        result.status = req.body.status;
         //save the upsate to the DB
         result.save().then(()=>{
             res.status(200).send('status update successful!');

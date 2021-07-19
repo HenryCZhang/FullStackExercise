@@ -8,6 +8,8 @@
 </ion-header>
 
 <ion-content>
+  <!-- A button that navigates to the add-task page -->
+  <a routerLink="/add-task" routerLinkActive="active"><ion-button class='add-button' color='dark'>Add Task</ion-button></a>
   <ion-list *ngFor="let task of tasks" >
     <ion-item >
       <ion-label [ngClass]="{'green-color': task.status=='Not Done', 'grey-color': task.status=='done' || task.status=='deleted'}">
@@ -18,13 +20,11 @@
         <h2>End Date: {{task.date_of_end | date}}</h2>
         <h2>Status: {{task.status}}</h2>
       </ion-label>
-      <ion-checkbox slot="start" color="warning" (click)='deletTask(task)'></ion-checkbox>
+      <ion-checkbox slot="start" color="warning" (click)='checkTask(task)'></ion-checkbox>
       <!-- delete button -->
-      <!-- <ion-button expand="block" color="danger" (click)='deletTask(task)' *ngIf="task.status!='deleted'">Delete</ion-button> -->
+      <ion-button expand="block" color="danger" (click)='deleteTask(task)' *ngIf="task.status!='deleted'">Delete</ion-button>
     </ion-item>
   </ion-list>
-  <!-- A button that navigates to the add-task page -->
-  <a routerLink="/add-task" routerLinkActive="active"><ion-button class='add-button' color='dark'>Add Task</ion-button></a>
 </ion-content>
 
   

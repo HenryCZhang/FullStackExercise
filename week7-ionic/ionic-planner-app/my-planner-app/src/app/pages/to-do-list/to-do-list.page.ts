@@ -26,7 +26,7 @@ export class ToDoListPage implements OnInit {
     });
   }
 
-  async deletTask(task){
+  async deleteTask(task){
     this.taskService.taskID = task.id; //get the current task id  - the key to success!!!
     this.taskService.delete_task().subscribe((result)=>{
       console.log(result);
@@ -41,5 +41,23 @@ export class ToDoListPage implements OnInit {
     });
     toast.present();
   }
+
+
+  async checkTask(task){
+    this.taskService.taskID = task.id; //get the current task id  - the key to success!!!
+    this.taskService.check_task(task.id, "done").subscribe((result)=>{
+      console.log(result);
+    },(err)=>{
+      console.log(err);
+    })
+    task.status='done';
+    // this.taskService.status='done';//update DB status
+    const toast = await this.toastController.create({
+      message: `Task: ${task.name} has been checked ~ refresh to see changes`,
+      duration: 2000
+    });
+    toast.present();
+  }
+
   
 }

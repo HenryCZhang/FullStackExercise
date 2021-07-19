@@ -12,9 +12,7 @@ export class AppComponent {
     { title: 'Add Goals', url: 'add-goals', icon: 'add-circle' },
     { title: 'Achievements', url: 'achievements', icon: 'ribbon' },
     { title: 'Notes', url: 'notes', icon: 'pricetag' },
-    { title: 'Add Notes', url: 'add-notes', icon: 'add-circle' },
-    { title: 'Video Diary', url: 'video-diary', icon: 'play-circle' },
-    { title: 'Image Diary', url: 'image-diary', icon: 'image' },
+    { title: 'Add Notes', url: 'add-notes', icon: 'add-circle' }
   ];
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor() {}

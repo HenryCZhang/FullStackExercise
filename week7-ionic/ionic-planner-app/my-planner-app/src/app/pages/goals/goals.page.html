@@ -8,6 +8,8 @@
 </ion-header>
 
 <ion-content>
+  <!-- A button that navigates to the add-goal page -->
+  <a routerLink="/add-goals" routerLinkActive="active"><ion-button class='add-button' color='dark'>Add Goal</ion-button></a>
   <ion-list *ngFor="let goal of goals" >
     <ion-item >
       <ion-label [ngClass]="{'green-color': goal.status=='not done', 'grey-color': goal.status=='done'}">
@@ -19,6 +21,4 @@
       <ion-checkbox slot="start" color="warning" (click)='deleteGoal(goal)'></ion-checkbox>
     </ion-item>
   </ion-list>
-  <!-- A button that navigates to the add-goal page -->
-  <a routerLink="/add-goals" routerLinkActive="active"><ion-button class='add-button' color='dark'>Add Goal</ion-button></a>
 </ion-content>

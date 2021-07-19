@@ -38,18 +38,6 @@ const routes: Routes = [
   {
     path: 'add-notes',
     loadChildren: () => import('./pages/add-notes/add-notes.module').then( m => m.AddNotesPageModule)
-  },
-  {
-    path: 'video-diary',
-    loadChildren: () => import('./pages/video-diary/video-diary.module').then( m => m.VideoDiaryPageModule)
-  },
-  {
-    path: 'images-diary',
-    loadChildren: () => import('./pages/images-diary/images-diary.module').then( m => m.ImagesDiaryPageModule)
-  },
-  {
-    path: 'image-diary',
-    loadChildren: () => import('./pages/image-diary/image-diary.module').then( m => m.ImageDiaryPageModule)
   }
 ];
 
