@@ -12,7 +12,7 @@
   <a routerLink="/add-task" routerLinkActive="active"><ion-button class='add-button' color='dark'>Add Task</ion-button></a>
   <ion-list *ngFor="let task of tasks" >
     <ion-item >
-      <ion-label [ngClass]="{'green-color': task.status=='Not Done', 'grey-color': task.status=='done' || task.status=='deleted'}">
+      <ion-label [ngClass]="{'green-color': task.status=='Not Done' || task.status=='', 'grey-color': task.status=='done' || task.status=='deleted'}">
         <h2>ID: {{task.id}}</h2>
         <h1>Name: {{task.name}}</h1>
         <h2>Description: {{task.description}}</h2>

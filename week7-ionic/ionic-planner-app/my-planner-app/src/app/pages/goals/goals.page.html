@@ -12,7 +12,7 @@
   <a routerLink="/add-goals" routerLinkActive="active"><ion-button class='add-button' color='dark'>Add Goal</ion-button></a>
   <ion-list *ngFor="let goal of goals" >
     <ion-item >
-      <ion-label [ngClass]="{'green-color': goal.status=='not done', 'grey-color': goal.status=='done'}">
+      <ion-label [ngClass]="{'green-color': goal.status=='Not Done', 'grey-color': goal.status=='done'}">
         <h2>ID: {{goal.id}}</h2>
         <h1>Goal</h1>
         <h2>Description: {{goal.description}}</h2>

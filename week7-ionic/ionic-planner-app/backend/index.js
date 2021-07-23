@@ -15,6 +15,16 @@ config.authenticate().then(()=>{
     console.log(err);
 })
 
+//Heroku Issue
+app.get('/',(req,res)=>{
+        // res.status(200).send("hello");
+        Task.findAll().then((result)=>{
+            res.status(200).send(result);
+        }).catch((err)=>{
+            res.status(500).send(err);
+        })
+})
+
 //----------------------Task Table
 app.get('/task',(req,res)=>{
     Task.findAll().then((result)=>{
@@ -113,10 +123,6 @@ app.delete('/note/:id',(req,res)=>{
     })
 })
 
-app.listen(1000,()=>{
-    console.log('server listening on port 1000');
-})
-
 //----------------------Goal Table
 app.get('/goal',(req,res)=>{
     Goal.findAll().then((result)=>{
@@ -178,4 +184,9 @@ app.get('/goal/filter',(req,res)=>{
     }).catch((err)=>{
         res.status(500).send(err);
     })
+})
+
+//Heroku: process.env.PORT (environment varivale)
+app.listen(process.env.PORT || 1000,()=>{
+    console.log('server listening on port 1000');
 })

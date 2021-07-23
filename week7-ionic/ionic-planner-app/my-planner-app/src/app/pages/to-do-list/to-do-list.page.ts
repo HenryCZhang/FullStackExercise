@@ -27,8 +27,7 @@ export class ToDoListPage implements OnInit {
   }
 
   async deleteTask(task){
-    this.taskService.taskID = task.id; //get the current task id  - the key to success!!!
-    this.taskService.delete_task().subscribe((result)=>{
+    this.taskService.delete_task(task.id).subscribe((result)=>{
       console.log(result);
     },(err)=>{
       console.log(err);
@@ -44,7 +43,6 @@ export class ToDoListPage implements OnInit {
 
 
   async checkTask(task){
-    this.taskService.taskID = task.id; //get the current task id  - the key to success!!!
     this.taskService.check_task(task.id, "done").subscribe((result)=>{
       console.log(result);
     },(err)=>{
