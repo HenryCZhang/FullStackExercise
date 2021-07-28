@@ -42,7 +42,7 @@ app.post('/task',(req,res)=>{
     })
 })
 
-//Update task status by ID - not wroking!!!
+//Update task status by ID
 app.patch('/task/:id',(req,res)=>{
     let id = parseInt(req.params.id);
     Task.findByPk(id).then((result)=>{

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8d5fee1c-a2b8-4a87-8b2b-be0f29c57e9d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Week4Exercise/NumCountHospital/HospitalAPP/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/Week4Exercise/NumCountHospital/HospitalAPP/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Week4Exercise/NumCountHospital/HospitalAPP/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Week4Exercise/NumCountHospital/HospitalAPP/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/week7-ionic/.idea/week7-ionic.iml" beforeDir="false" afterPath="$PROJECT_DIR$/week7-ionic/.idea/week7-ionic.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/week7-ionic/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/week7-ionic/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/week7-ionic/ionic-planner-app/backend/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/week7-ionic/ionic-planner-app/backend/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/week7-ionic/ionic-planner-app/my-planner-app/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/week7-ionic/ionic-planner-app/my-planner-app/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/week7-ionic/ionic-planner-app/my-planner-app/src/app/pages/add-notes/add-notes.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/week7-ionic/ionic-planner-app/my-planner-app/src/app/pages/add-notes/add-notes.page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/week7-ionic/ionic-planner-app/my-planner-app/src/app/services/task-service.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/week7-ionic/ionic-planner-app/my-planner-app/src/app/services/task-service.service.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/week7-ionic/ionic-planner-app/backend" />
+  </component>
+  <component name="ProjectId" id="1vxguu7nxySENr15lmG5tDs2SXr" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="excluded.www.directory" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/week6Exercise/my-tourism-app/node_modules/typescript/lib" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8d5fee1c-a2b8-4a87-8b2b-be0f29c57e9d" name="Default Changelist" comment="" />
+      <created>1627509379818</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1627509379818</updated>
+      <workItem from="1627509380939" duration="362000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/Week4Exercise/Creating Students and Undergraduates Objects/miniproject1.js" />
+      </list>
+    </option>
+  </component>
+</project>

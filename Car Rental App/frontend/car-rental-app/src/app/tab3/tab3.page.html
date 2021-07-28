@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      My Business
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <!--Car Client List-->
+  <ion-list *ngFor="let car of cars" >
+      <div class="row">
+        <div class="col">
+          <img class='carImg' src="../../assets/sports/2020-porsche-718_100757785.jpeg" />
+          <ul>
+            <li><p>Return Location: <br>{{car.return_location}}</p></li>
+            <li><p>Return Date: {{car.end_date}}</p></li>
+          </ul>
+        </div>
+        <div class="col">
+          <ion-card-content class='message-avatar'>
+            <h1>Client:</h1>
+            <ion-item>
+              <ion-avatar slot="start">
+                <img src="../../assets/message - avatar/jacob.png">
+              </ion-avatar>
+              <ion-label>
+                <h2>Jacob</h2>
+                <h3>jacob123@gmail.com</h3>
+              </ion-label>
+            </ion-item>
+            <!--Removing car is only allowed when the car is not rented out-->
+            <ion-button color="danger" (click)="confirmDelete()">Remove (remove car)</ion-button>
+          </ion-card-content>
+        </div>
+      </div>
+  </ion-list>
+
+</ion-content>

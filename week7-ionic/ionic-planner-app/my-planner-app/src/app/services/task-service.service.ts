@@ -8,8 +8,6 @@ import { Task } from '../interfaces/task';
 })
 export class TaskService {
 
-  status;
-
   constructor(private http:HttpClient) { }
 
   // get_tasks():Observable<Task[]>{
@@ -22,7 +20,7 @@ export class TaskService {
 
   // // not sure!!! - for updating the DB status
   // check_task(taskId, status){
-  //   return this.http.patch("http://localhost:1000/task/"+taskId, {status}); 
+  //   return this.http.patch("http://localhost:1000/task/"+taskId, {status});
   // }
 
   // get_done_tasks():Observable<Task[]>{
@@ -44,7 +42,7 @@ export class TaskService {
 
   //not sure!!! - for updating the DB status
   check_task(taskId, status){
-    return this.http.patch("https://to-do-list-200.herokuapp.com/task/"+taskId, {status}); 
+    return this.http.patch("https://to-do-list-200.herokuapp.com/task/"+taskId, {status});
   }
 
   get_done_tasks():Observable<Task[]>{

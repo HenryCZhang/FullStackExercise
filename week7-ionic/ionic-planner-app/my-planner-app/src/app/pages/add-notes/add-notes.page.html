@@ -37,12 +37,14 @@
 
     <ion-item>
       <ion-label position="stacked">Importance:</ion-label>
-      <!-- <ion-input formControlName='importance'></ion-input> -->
       <ion-select placeholder="Select One" formControlName='importance'>
         <ion-select-option value="low">Low</ion-select-option>
         <ion-select-option value="medium">Medium</ion-select-option>
         <ion-select-option value="high">High</ion-select-option>
       </ion-select>
+    </ion-item>
+    <ion-item *ngIf="importanceFormControl.touched && importanceFormControl.errors?.required" color="danger">
+      This field is required
     </ion-item>
 
     <ion-button color='primary' (click)='onSubmit()' [disabled]='noteForm.invalid'>Submit</ion-button>  

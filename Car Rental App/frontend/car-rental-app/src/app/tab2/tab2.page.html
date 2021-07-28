@@ -1,0 +1,130 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      My Orders
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <!-- car list ordered by the days left -->
+  <!--person 3-->
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <img class='carImg' src="../../assets/civic/blackBM.jpeg" />
+        <!-- TODO: the color of the label and progression bar corresponds to the days left -->
+        <ion-label class='reminder' color='dark'>Expired!</ion-label>
+        <ion-progress-bar class='reminder' value="0" reversed='true' color='dark'></ion-progress-bar>
+        <p>Return Location: 321 Mill St, London, ON N6H CP0</p>
+      </div>
+      <div class="col">
+        <ion-card-content class='message-avatar'>
+          <h1>Owner:</h1>
+          <ion-item>
+            <ion-avatar slot="start">
+              <img src="../../assets/message - avatar/peter.png">
+            </ion-avatar>
+            <ion-label>
+              <h2>Peter</h2>
+              <h3>jacob123@gmail.com</h3>
+              <!-- <p>Are you still interested in my offer?</p> -->
+            </ion-label>
+          </ion-item>
+          <ion-button color="danger" (click)="confirmDelete()">Remove</ion-button>
+          <ion-button color="warning">Keep Contact</ion-button>
+        </ion-card-content>
+      </div>
+    </div>
+  </div>
+    
+  <!--person 1-->
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <img class='carImg' src="../../assets/sports/2020-porsche-718_100757785.jpeg" />
+        <!-- TODO: the color of the label and progression bar corresponds to the days left -->
+        <ion-label class='reminder' color='danger'>2 days till return</ion-label>
+        <ion-progress-bar value="0.2" reversed='true' color='danger'></ion-progress-bar>
+        <p>Return Location: 321 Mill St, London, ON N6H CP0</p>
+      </div>
+      <div class="col">
+        <ion-card-content class='message-avatar'>
+          <h1>Owner:</h1>
+          <ion-item>
+            <ion-avatar slot="start">
+              <img src="../../assets/message - avatar/jacob.png">
+            </ion-avatar>
+            <ion-label>
+              <h2>Jacob</h2>
+              <h3>jacob123@gmail.com</h3>
+              <p>Are you still interested in my offer?</p>
+            </ion-label>
+          </ion-item>
+          <ion-button color="warning">Keep Contact</ion-button>
+        </ion-card-content>
+      </div>
+    </div>
+  </div>
+
+  <!--person 1-->
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <img class='carImg' src="../../assets/civic/toyota-camry-trd-2021-01-angle--exterior--front--white.jpeg" />
+        <!-- TODO: the color of the label and progression bar corresponds to the days left -->
+        <ion-label class='reminder' color='primary'>14 days till return</ion-label>
+        <ion-progress-bar value="0.5" reversed='true' color='primary'></ion-progress-bar>
+        <p>Return Location: 321 Mill St, London, ON N6H CP0</p>
+      </div>
+      <div class="col">
+        <ion-card-content class='message-avatar'>
+          <h1>Owner:</h1>
+          <ion-item>
+            <ion-avatar slot="start">
+              <img src="../../assets/message - avatar/jacob.png">
+            </ion-avatar>
+            <ion-label>
+              <h2>Jacob</h2>
+              <h3>jacob123@gmail.com</h3>
+              <p>Are you still interested in my offer?</p>
+            </ion-label>
+          </ion-item>
+          <ion-button color="warning">Keep Contact</ion-button>
+        </ion-card-content>
+      </div>
+    </div>
+  </div>
+
+  <!--person 2-->
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <img class='carImg' src="../../assets/sports/2020-ford-mustang-shelby-gt350-heritage-edition-3.jpeg"/>
+        <!-- TODO: the color of the label and progression bar corresponds to the days left -->
+        <ion-label class='reminder' color='primary'>40 days till return</ion-label>
+        <ion-progress-bar value="0.8" reversed='true' color='primary'></ion-progress-bar>
+        <p>Return Location: 321 Mill St, London, ON N6H CP0</p>
+      </div>
+      <div class="col">
+        <ion-card-content class='message-avatar'>
+          <h1>Owner:</h1>
+          <ion-item>
+            <ion-avatar slot="start">
+              <img src="../../assets/message - avatar/channel.png">
+            </ion-avatar>
+            <ion-label>
+              <h2>Emily</h2>
+              <h3>jacob123@gmail.com</h3>
+              <p>Are you still interested in my offer?</p>
+            </ion-label>
+          </ion-item>
+          <ion-button color="warning">Keep Contact</ion-button>
+        </ion-card-content>
+      </div>
+    </div>
+  </div>
+      
+</ion-content>
+

@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4976cc8a-4d06-4cbd-8688-8ff547e803e8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/ionic-planner-app/my-planner-app/src/app/pages/goals/goals.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/ionic-planner-app/my-planner-app/src/app/pages/goals/goals.page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/week7-ionic.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/week7-ionic.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ionic-planner-app/my-planner-app/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ionic-planner-app/my-planner-app/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ionic-planner-app/my-planner-app/src/app/pages/add-notes/add-notes.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/ionic-planner-app/my-planner-app/src/app/pages/add-notes/add-notes.page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ionic-planner-app/my-planner-app/src/app/services/task-service.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ionic-planner-app/my-planner-app/src/app/services/task-service.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +25,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="excluded.www.directory" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -42,6 +47,8 @@
       <workItem from="1626734383762" duration="511000" />
       <workItem from="1626819226717" duration="536000" />
       <workItem from="1626904758571" duration="19000" />
+      <workItem from="1627147139809" duration="6277000" />
+      <workItem from="1627314284397" duration="1134000" />
     </task>
     <servers />
   </component>
