@@ -21,7 +21,6 @@ app.listen(8000,()=>{
     console.log('listening on port 8000');
 })
 
-//Lessors Table
 app.post('/register', function(req, res){
 
     let plainPassword = req.body.password;
@@ -42,11 +41,6 @@ app.post('/register', function(req, res){
         });
 
     });    
-});
-
-//Orders Table
-app.post('/place-order', function(req, res){
-    // pass in the current logged in user data   
 });
 
 app.post('/login', function(req, res){
@@ -81,19 +75,32 @@ app.post('/login', function(req, res){
 });
 
  //----------------------Cars Table
+// app.get('/car',(req,res)=>{
+//     Cars.findAll().then((result)=>{
+//         res.status(200).send(result);
+//     }).catch((err)=>{
+//         res.status(500).send(err);
+//     })
+// })
+//tab1 - diaplay cars that are not rented
 app.get('/car',(req,res)=>{
-    Cars.findAll().then((result)=>{
+    let data={
+        where:{
+            rented: false 
+        }
+    }
+    Cars.findAll(data).then((result)=>{
         res.status(200).send(result);
     }).catch((err)=>{
         res.status(500).send(err);
     })
 })
-
+//find cars belonging to the current user 
 app.get('/car/:id',(req,res)=>{
     let lessor_id = parseInt(req.params.id);
     let data={
         where:{
-            lessor_id: lessor_id //not sure!
+            lessor_id: lessor_id 
         }
     }
     Cars.findAll(data).then((result)=>{
@@ -103,22 +110,6 @@ app.get('/car/:id',(req,res)=>{
     })
 })
 
-// app.patch('/task/:id',(req,res)=>{
-//     let id = parseInt(req.params.id);
-//     Task.findByPk(id).then((result)=>{
-//         console.log(result);
-//         result.status = req.body.status;
-//         //save the upsate to the DB
-//         result.save().then(()=>{
-//             res.status(200).send('status update successful!');
-//         }).catch((err)=>{
-//             res.status(400).send(err);
-//         })
-//     }).catch((err)=>{
-//         res.status(400).send(err);
-//     })
-// })
-
 app.post('/car',(req,res)=>{
     Cars.create(req.body).then((result)=>{
         res.status(200).send(result);
@@ -127,22 +118,27 @@ app.post('/car',(req,res)=>{
     })
 })
 
-//Update car info by ID 
-// app.patch('/task/:id',(req,res)=>{
-//     let id = parseInt(req.params.id);
-//     Cars.findByPk(id).then((result)=>{
-//         console.log(result);
-//         result.status = req.body.status;
-//         //save the update to the DB
-//         result.save().then(()=>{
-//             res.status(200).send('status update successful!');
-//         }).catch((err)=>{
-//             res.status(400).send(err);
-//         })
-//     }).catch((err)=>{
-//         res.status(400).send(err);
-//     })
-// })
+//Update car rented value by car ID
+app.patch('/car/:id',(req,res)=>{
+    let id = parseInt(req.params.id);
+    let data={
+        where:{
+            id: id 
+        }
+    }
+    Cars.findAll(data).then((result)=>{
+        console.log(result);
+        result.rented = req.body.rented;
+        //save the update to the DB
+        result.save().then(()=>{
+            res.status(200).send('renetd update successful!');
+        }).catch((err)=>{
+            res.status(400).send(err);
+        })
+    }).catch((err)=>{
+        res.status(400).send(err);
+    })
+})
 
 app.delete('/car/:id',(req,res)=>{
     let id = parseInt(req.params.id);
@@ -177,6 +173,24 @@ app.get('/car/filter',(req,res)=>{
  //----------------------Lessors Table
 app.get('/lessor',(req,res)=>{
     Lessors.findAll().then((result)=>{
+        res.status(200).send(result);
+    }).catch((err)=>{
+        res.status(500).send(err);
+    })
+})
+
+
+ //----------------------Orders Table
+app.get('/order',(req,res)=>{
+    Orders.findAll().then((result)=>{
+        res.status(200).send(result);
+    }).catch((err)=>{
+        res.status(500).send(err);
+    })
+})
+
+app.post('/order',(req,res)=>{
+    Orders.create(req.body).then((result)=>{
         res.status(200).send(result);
     }).catch((err)=>{
         res.status(500).send(err);

@@ -13,8 +13,7 @@ export class CarService {
   get_car():Observable<Car[]>{
     return this.http.get<Car[]>("http://localhost:8000/car");
   }
-
-  //TODO: return all the cars under a specific lessor account
+  
   get_car_byLessor(lessor_id):Observable<Car[]>{
     return this.http.get<Car[]>("http://localhost:8000/car/"+lessor_id);
   }
@@ -25,5 +24,9 @@ export class CarService {
 
   delete_car(carID){
     return this.http.delete("http://localhost:8000/car",carID);
+  }
+
+  update_rented(car_id,rented){
+    return this.http.patch("http://localhost:8000/car/"+car_id,{rented});
   }
 }

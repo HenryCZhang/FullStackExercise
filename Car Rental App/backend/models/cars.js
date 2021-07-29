@@ -55,6 +55,10 @@ const Cars  = config.define('Cars',{
     return_location:{
         type: Sequelize.STRING,
         allowNull: false,
+    },
+    rented:{
+        type: Sequelize.BOOLEAN,
+        allowNull: true,
     }
 },{timestamps:false});
 

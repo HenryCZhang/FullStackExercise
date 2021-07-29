@@ -3,6 +3,10 @@ import { AlertController, MenuController, ToastController } from '@ionic/angular
 import { CarService } from'../services/car-service.service';
 import { Car } from '../interfaces/car';
 import { UserService } from '../services/user.service';
+import { OrderService } from '../services/order-service.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -11,9 +15,20 @@ import { UserService } from '../services/user.service';
 export class Tab1Page {
 
   cars:Car[];
+  orderForm;
   toggled=false;
 
-  constructor(private menu: MenuController, private carService:CarService,private userService:UserService,public toastController: ToastController, private alertController:AlertController) { }
+  constructor(private menu: MenuController, private carService:CarService,public toastController: ToastController, private alertController:AlertController,private builder:FormBuilder,private userService:UserService,private orderService:OrderService,private router:Router) { 
+      this.orderForm = builder.group({
+        // car_id:[],
+        client_firstname:[`${userService.get_current_user().first_name}`],
+        client_lastname:[`${userService.get_current_user().last_name}`],
+        client_email:[`${userService.get_current_user().email}`],
+        start_date:['',[Validators.required]],
+        end_date:['',[Validators.required]],
+        // client_picture:[]
+      })
+  }
 
   //get all the cars in the DB
   ionViewWillEnter(){
@@ -67,6 +82,29 @@ export class Tab1Page {
       ]
     });
     await alert.present();
+  }
+
+
+  async placeOrder(car){
+    // this.orderForm.car_id = car_id; ??? how to pass this car id into carForm?
+    // this.carService.update_rented(car_id,true);//update car rented value!
+    car.rented = !car.rented;
+    this.router.navigate(['']);//auto refresh page to see changes
+    this.orderService.add_order(this.orderForm.value).subscribe((result)=>{
+      console.log(result);
+      this.showMessage('Order has been placed');
+    },(err)=>{
+      console.log(err);
+      this.showMessage("Err! Order could not be placed");
+    })
+  }
+
+  get  start_dateFormControl(){
+    return this.orderForm.get('start_date');
+  }
+
+  get  end_dateFormControl(){
+    return this.orderForm.get('end_date');
   }
 
 }

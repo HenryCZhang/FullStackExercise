@@ -10,7 +10,7 @@ const Orders = config.define('Orders',{
     },
     car_id: {
         type:Sequelize.INTEGER,
-        allowNull:false,
+        allowNull:true,
     },
     client_firstname: {
         type: Sequelize.STRING,
@@ -32,9 +32,9 @@ const Orders = config.define('Orders',{
         type: Sequelize.DATE,
         allowNull: false
     },
-    status:{
+    client_picture:{
         type:Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     }
 },{timestamps:false});
 
