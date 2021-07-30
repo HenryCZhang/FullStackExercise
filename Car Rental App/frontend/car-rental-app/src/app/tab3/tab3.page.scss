@@ -1,29 +1,14 @@
 ion-title{
     text-align: center;
 }
-.add-car-button{
-    margin-left: 37%;
-}
-.carImg{
-    width:500px;
-    height:auto;
+
+ion-button{
+    width:100%;
 }
 
-// laptop view
-@media only screen and (min-width: 1000px) {
-    .carImg{
-        width:700px;
-        height:auto;
-    }
-    .message-avatar{
-        padding-top: 150px;
-    }
-    .add-car-button{
-        margin-left: 45%;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        width:200px;
-    }
+.carImg{
+    width:100%;
+    height:auto;
 }
 
 .row{
@@ -34,7 +19,6 @@ ion-title{
 .reminder{
     font-size: large;
     font-weight: bold;
-
 }
 
 ion-progress-bar{

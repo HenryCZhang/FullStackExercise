@@ -9,6 +9,7 @@
 <ion-content [fullscreen]="true">
 
   <!--Car Client List-->
+  <h3>TODO: display cars in descending order by id</h3>
   <ion-list *ngFor="let car of cars" >
       <div class="row">
         <div class="col">
@@ -16,22 +17,26 @@
           <ul>
             <li><p>Return Location: <br>{{car.return_location}}</p></li>
             <li><p>Return Date: {{car.end_date}}</p></li>
+            <h3>Car ID: {{car.id}} (for testing)</h3>
           </ul>
         </div>
         <div class="col">
           <ion-card-content class='message-avatar'>
-            <h1>Client:</h1>
-            <ion-item>
-              <ion-avatar slot="start">
-                <img src="../../assets/message - avatar/jacob.png">
-              </ion-avatar>
-              <ion-label>
-                <h2>Jacob</h2>
-                <h3>jacob123@gmail.com</h3>
-              </ion-label>
-            </ion-item>
-            <!--Removing car is only allowed when the car is not rented out-->
-            <ion-button color="danger" (click)="confirmDelete()">Remove (remove car)</ion-button>
+            <!-- ngIf: check if the car has an order on it-->
+            <div *ngIf='car.Orders[0]'>
+              <h1>Client:</h1>
+              <ion-item>
+                <ion-avatar slot="start">
+                  <img src="../../assets/message - avatar/jacob.png">
+                </ion-avatar>
+                <ion-label>
+                  <h2>{{car.Orders[0].client_firstname}}</h2>
+                  <h2>{{car.Orders[0].client_lastname}}</h2>
+                  <h3>{{car.Orders[0].client_email}}</h3>
+                </ion-label>
+              </ion-item>
+            </div>
+            <ion-button color="danger" (click)="confirmDelete(car)" [hidden]='car.Orders[0]'>Remove - (No Client)</ion-button>
           </ion-card-content>
         </div>
       </div>

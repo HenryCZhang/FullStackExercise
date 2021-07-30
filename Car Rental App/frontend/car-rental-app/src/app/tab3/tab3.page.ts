@@ -3,6 +3,8 @@ import { FormBuilder,Validators  } from '@angular/forms';
 import { CarService } from'../services/car-service.service';
 import { Car } from '../interfaces/car';
 import { UserService } from '../services/user.service';
+import { AlertController, ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab3',
@@ -15,17 +17,16 @@ export class Tab3Page {
   lessorForm;
   cars:Car[];
 
-  constructor(private builder:FormBuilder, private carService:CarService,private userService:UserService) {
+  constructor(private builder:FormBuilder, private carService:CarService,private userService:UserService,public toastController: ToastController, private alertController:AlertController,private router:Router) {
     //get the current user's info
     this.current_user = userService.get_current_user();
 
-     //for the formControlName in html
-     this.lessorForm = builder.group({
-      firstName:['',[Validators.required]],
-      lastName:['',[Validators.required]],
-      email:['',[Validators.required]],
-      password:['',[Validators.required]],
-    })
+    //  this.lessorForm = builder.group({
+    //   firstName:['',[Validators.required]],
+    //   lastName:['',[Validators.required]],
+    //   email:['',[Validators.required]],
+    //   password:['',[Validators.required]],
+    // })
   }
 
   //get all the cars under this lessor account
@@ -36,5 +37,39 @@ export class Tab3Page {
       console.log(err);
     });
   }
+
+
+  async showMessage(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 1000
+    });
+    toast.present();
+  }
+
+  async confirmDelete(car){
+    const alert = await this.alertController.create({
+      message: 'Are you sure that you want to delete this car?',
+      buttons: [
+        {
+          text: 'cancel',
+        },
+        {
+          text: 'yes',
+          handler: () => {
+            this.carService.delete_car(car.id).subscribe((result)=>{
+              console.log(result);
+            },(err)=>{
+              console.log(err);
+            });
+            this.showMessage("Car has been deleted");
+            this.router.navigate(['/tabs/tab3']);//doesn't refresh the page!!!
+          }
+        },
+      ]
+    })
+    await alert.present();
+  }
+
 
 }

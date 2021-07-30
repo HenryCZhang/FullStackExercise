@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { CarService } from '../services/car-service.service';
+import { OrderService } from '../services/order-service.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -10,9 +12,10 @@ import { UserService } from '../services/user.service';
 export class Tab2Page {
 
   current_user;
-
-  constructor(private alertController:AlertController,private userService:UserService) {
-     
+  car;
+  orders; 
+  constructor(private alertController:AlertController,private userService:UserService, private carService:CarService, private orderService:OrderService) {
+    this.current_user = userService.get_current_user();
    }
  
   async confirmDelete(){
@@ -22,6 +25,23 @@ export class Tab2Page {
       buttons: ['cancel', 'yes']
     });
     await alert.present();
+  }
+
+  //get all the orders under the current user account
+  ionViewWillEnter(){
+    this.orderService.get_order_byUser(this.current_user.email).subscribe((result)=>{
+      this.orders=result;
+    },(err)=>{
+      console.log(err);
+    });
+  }
+   //get the car in the order -> to display car info in the order 
+  getCarByOrder(order){
+    this.carService.get_car_byOrder(order.car_id).subscribe((result)=>{
+      this.car=result;
+    },(err)=>{
+      console.log(err);
+    });
   }
 
 }

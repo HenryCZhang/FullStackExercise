@@ -1,7 +1,7 @@
 const Sequelize =  require('sequelize');
 const config = require('../config');
 
-const Cars  = config.define('Cars',{
+const Car  = config.define('Cars',{
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -59,7 +59,11 @@ const Cars  = config.define('Cars',{
     rented:{
         type: Sequelize.BOOLEAN,
         allowNull: true,
+    },
+    car_picture:{
+        type: Sequelize.STRING,
+        allowNull: true,
     }
 },{timestamps:false});
 
-module.exports = Cars;
+module.exports = Car;

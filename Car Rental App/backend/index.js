@@ -1,12 +1,31 @@
 const express = require('express');
 const app = express();
 const config = require('./config');
-const Cars = require('./models/cars');
-const Orders = require('./models/orders');
-const Lessors = require('./models/lessors');
+const Car = require('./models/car');
+const Order = require('./models/order');
+const Lessor = require('./models/lessor');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+
+//FK Cascade
+Car.belongsTo(Lessor, {
+    foreignKey: 'lessor_id'
+});
+
+Lessor.hasMany(Car, {
+    foreignKey: 'lessor_id'
+});
+
+Order.belongsTo(Car, {
+    foreignKey: 'car_id'
+});
+
+Car.hasMany(Order, {
+    foreignKey: 'car_id'
+});
+
+
 
 app.use(cors());//allow Angular to access the node js
 app.use(express.json())//middleware
@@ -34,7 +53,7 @@ app.post('/register', function(req, res){
             password: hash
         };
 
-        Lessors.create(user_data).then((result) => {
+        Lessor.create(user_data).then((result) => {
             res.status(200).send(result);
         }).catch((err) => {
             res.status(500).send(err);
@@ -52,7 +71,7 @@ app.post('/login', function(req, res){
     }
 
     //Find a user that corresponds to the email
-    Lessors.findOne(user_data).then((result) => {
+    Lessor.findOne(user_data).then((result) => {
 
         if(result){
             console.log(result);
@@ -75,13 +94,15 @@ app.post('/login', function(req, res){
 });
 
  //----------------------Cars Table
-// app.get('/car',(req,res)=>{
-//     Cars.findAll().then((result)=>{
-//         res.status(200).send(result);
-//     }).catch((err)=>{
-//         res.status(500).send(err);
-//     })
-// })
+
+app.get('/car',(req,res)=>{
+    Car.findAll().then((result)=>{
+        res.status(200).send(result);
+    }).catch((err)=>{
+        res.status(500).send(err);
+    })
+})
+
 //tab1 - diaplay cars that are not rented
 app.get('/car',(req,res)=>{
     let data={
@@ -89,21 +110,39 @@ app.get('/car',(req,res)=>{
             rented: false 
         }
     }
-    Cars.findAll(data).then((result)=>{
+    Car.findAll(data).then((result)=>{
         res.status(200).send(result);
     }).catch((err)=>{
         res.status(500).send(err);
     })
 })
 //find cars belonging to the current user 
-app.get('/car/:id',(req,res)=>{
+app.get('/car_lessor/:id',(req,res)=>{
     let lessor_id = parseInt(req.params.id);
     let data={
         where:{
             lessor_id: lessor_id 
-        }
+        },
+        include: Order //business tab: display client info
     }
-    Cars.findAll(data).then((result)=>{
+    Car.findAll(data).then((result)=>{
+        res.status(200).send(result);
+    }).catch((err)=>{
+        res.status(500).send(err);
+    })
+})
+
+//find the car in an order
+app.get('/car_order/:id',(req,res)=>{
+    let car_id = parseInt(req.params.id);
+    let data={
+        where:{
+            id: car_id
+        },
+        include: Lessor
+    }
+    Car.findAll(data).then((result)=>{
+        console.log(result);
         res.status(200).send(result);
     }).catch((err)=>{
         res.status(500).send(err);
@@ -111,7 +150,7 @@ app.get('/car/:id',(req,res)=>{
 })
 
 app.post('/car',(req,res)=>{
-    Cars.create(req.body).then((result)=>{
+    Car.create(req.body).then((result)=>{
         res.status(200).send(result);
     }).catch((err)=>{
         res.status(500).send(err);
@@ -121,17 +160,12 @@ app.post('/car',(req,res)=>{
 //Update car rented value by car ID
 app.patch('/car/:id',(req,res)=>{
     let id = parseInt(req.params.id);
-    let data={
-        where:{
-            id: id 
-        }
-    }
-    Cars.findAll(data).then((result)=>{
+    Car.findByPk(id).then((result)=>{
         console.log(result);
         result.rented = req.body.rented;
-        //save the update to the DB
+        //save the upsate to the DB
         result.save().then(()=>{
-            res.status(200).send('renetd update successful!');
+            res.status(200).send('car rented update successful!');
         }).catch((err)=>{
             res.status(400).send(err);
         })
@@ -140,13 +174,10 @@ app.patch('/car/:id',(req,res)=>{
     })
 })
 
-app.delete('/car/:id',(req,res)=>{
+app.delete('/delete_car/:id',(req,res)=>{
     let id = parseInt(req.params.id);
-    //Find the car by id
-    Cars.findByPk(id).then((result)=>{
-        //Delete record from DB
+    Car.findByPk(id).then((result)=>{
         result.destroy().then(()=>{
-            // res.redirect('/task'); 
             res.status(200).send('delete successful!');
         }).catch((err)=>{
             res.status(400).send(err);
@@ -156,14 +187,14 @@ app.delete('/car/:id',(req,res)=>{
     })
 })
 
-//find cars available
+//find cars available - based on dates
 app.get('/car/filter',(req,res)=>{
     let data={
         where:{
             //availibility condition
         }
     }
-    Cars.findAll(data).then((result)=>{
+    Car.findAll(data).then((result)=>{
         res.status(200).send(result);
     }).catch((err)=>{
         res.status(500).send(err);
@@ -172,7 +203,7 @@ app.get('/car/filter',(req,res)=>{
 
  //----------------------Lessors Table
 app.get('/lessor',(req,res)=>{
-    Lessors.findAll().then((result)=>{
+    Lessor.findAll().then((result)=>{
         res.status(200).send(result);
     }).catch((err)=>{
         res.status(500).send(err);
@@ -180,9 +211,23 @@ app.get('/lessor',(req,res)=>{
 })
 
 
- //----------------------Orders Table
-app.get('/order',(req,res)=>{
-    Orders.findAll().then((result)=>{
+//----------------------Orders Table
+
+//find orders belonging to the current user based on the client_email
+app.get('/order_user/:client_email',(req,res)=>{
+    let data={
+        where:{
+            client_email: req.params.client_email
+        },
+        include: {
+            model: Car,
+            include: {
+                model: Lessor
+            }
+        }
+    }
+    Order.findAll(data).then((result)=>{
+        console.log(result);
         res.status(200).send(result);
     }).catch((err)=>{
         res.status(500).send(err);
@@ -190,7 +235,7 @@ app.get('/order',(req,res)=>{
 })
 
 app.post('/order',(req,res)=>{
-    Orders.create(req.body).then((result)=>{
+    Order.create(req.body).then((result)=>{
         res.status(200).send(result);
     }).catch((err)=>{
         res.status(500).send(err);

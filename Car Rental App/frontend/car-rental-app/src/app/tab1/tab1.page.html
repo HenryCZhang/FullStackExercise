@@ -55,13 +55,19 @@
     <ion-item *ngIf="end_dateFormControl.touched && end_dateFormControl.errors?.required" color="danger">
       This field is required
     </ion-item>
+
+    <!-- test ~ TODO: pass the car id into the carForm automatically -->
+    <ion-item>
+      <ion-label>Car ID: (to be fixed)</ion-label>
+      <ion-input type="number" formControlName='car_id'></ion-input>
+    </ion-item>
     </form>
 
     <ion-button color='dark'>Search (no function yet)</ion-button>  
 
     <ion-list *ngFor="let car of cars" >
-      <ion-card (click)='toggleCarDetails(car)'>
-        <img class='carImg' src="../../assets/civic/blackBM.jpeg" >
+      <ion-card>
+        <img class='carImg' src="../../assets/civic/blackBM.jpeg" (click)='toggleCarDetails(car)'>
         <ion-card-header>
           <ion-card-title>Model: {{car.model}}, {{car.model_year}}</ion-card-title>
         </ion-card-header>
@@ -70,11 +76,11 @@
             <ion-card-title>Make: {{car.make}}</ion-card-title>
             <ion-card-title>Seats: {{car.seats}}</ion-card-title>
             <ion-card-title>Type: {{car.type}}</ion-card-title>
-            <ion-card-title>Car ID: {{car.id}}</ion-card-title>
+            <ion-card-title >Car ID: {{car.id}}</ion-card-title>
             <ion-card-title>Lessor ID: {{car.lessor_id}}</ion-card-title>
           </div>
         </ion-card-content>
-        <ion-button>Contact Owner</ion-button>
+        <ion-button color="dark">Contact Owner</ion-button>
         <ion-button color="warning" (click)="placeOrder(car)" [disabled]='car.rented'>Place Order</ion-button>
       </ion-card>
     </ion-list> 

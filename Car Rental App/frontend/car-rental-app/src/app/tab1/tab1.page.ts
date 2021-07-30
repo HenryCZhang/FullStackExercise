@@ -20,7 +20,7 @@ export class Tab1Page {
 
   constructor(private menu: MenuController, private carService:CarService,public toastController: ToastController, private alertController:AlertController,private builder:FormBuilder,private userService:UserService,private orderService:OrderService,private router:Router) { 
       this.orderForm = builder.group({
-        // car_id:[],
+        car_id:[],
         client_firstname:[`${userService.get_current_user().first_name}`],
         client_lastname:[`${userService.get_current_user().last_name}`],
         client_email:[`${userService.get_current_user().email}`],
@@ -89,6 +89,11 @@ export class Tab1Page {
     // this.orderForm.car_id = car_id; ??? how to pass this car id into carForm?
     // this.carService.update_rented(car_id,true);//update car rented value!
     car.rented = !car.rented;
+    this.carService.update_rented(car.id,car.rented).subscribe((result)=>{
+      console.log(result);
+    },(err)=>{
+      console.log(err);
+    })
     this.router.navigate(['']);//auto refresh page to see changes
     this.orderService.add_order(this.orderForm.value).subscribe((result)=>{
       console.log(result);

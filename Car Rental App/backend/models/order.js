@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const config = require('../config');
 
-const Orders = config.define('Orders',{
+const Order = config.define('Orders',{
     id: {
         type:Sequelize.INTEGER,
         primaryKey:true,
@@ -38,4 +38,4 @@ const Orders = config.define('Orders',{
     }
 },{timestamps:false});
 
-module.exports = Orders;
+module.exports = Order;

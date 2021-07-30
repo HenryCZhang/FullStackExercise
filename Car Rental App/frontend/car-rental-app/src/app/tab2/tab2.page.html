@@ -7,38 +7,17 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+ <!--TODO: display a list of orders -->
+ <ion-list *ngFor="let order of orders" >
+   <div class="order">
+    <h3>Order ID:{{order.id}}</h3>
+    <h3>Car ID:{{order.car_id}}</h3>
+    <h3>Order Start Date:{{order.start_date}}</h3>
+    <h3>Order End Date:{{order.end_date}}</h3>
+   </div>
+ </ion-list> 
 
   <!-- car list ordered by the days left -->
-  <!--person 3-->
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <img class='carImg' src="../../assets/civic/blackBM.jpeg" />
-        <!-- TODO: the color of the label and progression bar corresponds to the days left -->
-        <ion-label class='reminder' color='dark'>Expired!</ion-label>
-        <ion-progress-bar class='reminder' value="0" reversed='true' color='dark'></ion-progress-bar>
-        <p>Return Location: 321 Mill St, London, ON N6H CP0</p>
-      </div>
-      <div class="col">
-        <ion-card-content class='message-avatar'>
-          <h1>Owner:</h1>
-          <ion-item>
-            <ion-avatar slot="start">
-              <img src="../../assets/message - avatar/peter.png">
-            </ion-avatar>
-            <ion-label>
-              <h2>Peter</h2>
-              <h3>jacob123@gmail.com</h3>
-              <!-- <p>Are you still interested in my offer?</p> -->
-            </ion-label>
-          </ion-item>
-          <ion-button color="danger" (click)="confirmDelete()">Remove</ion-button>
-          <ion-button color="warning">Keep Contact</ion-button>
-        </ion-card-content>
-      </div>
-    </div>
-  </div>
-    
   <!--person 1-->
   <div class="container">
     <div class="row">

@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const config = require('../config');
 
-const Lessors = config.define('Lessors',{
+const Lessor = config.define('Lessors',{
     id:{
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -30,4 +30,4 @@ const Lessors = config.define('Lessors',{
     },
 },{timestamps:false});
 
-module.exports = Lessors;
+module.exports = Lessor;
