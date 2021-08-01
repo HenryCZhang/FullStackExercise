@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
-
+import { ContactService } from '../services/contact.service';
+import {MyContactPage} from '../pages/my-contact/my-contact.page'
 @Component({
   selector: 'app-tab4',
   templateUrl: 'tab4.page.html',
@@ -13,7 +14,7 @@ export class Tab4Page {
   current_user;
   loginActivated:boolean=false;
 
-  constructor(private userService:UserService,public toastController: ToastController, private alertController:AlertController, private router:Router) {
+  constructor(private userService:UserService,private contactService:ContactService,public toastController: ToastController, private alertController:AlertController, private router:Router) {
     this.current_user = userService.get_current_user();
   }
 

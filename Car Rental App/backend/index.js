@@ -4,28 +4,33 @@ const config = require('./config');
 const Car = require('./models/car');
 const Order = require('./models/order');
 const Lessor = require('./models/lessor');
+const Contact = require('./models/contact');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 //FK Cascade
+Lessor.hasMany(Car, {
+    foreignKey: 'lessor_id'
+});
 Car.belongsTo(Lessor, {
     foreignKey: 'lessor_id'
 });
 
-Lessor.hasMany(Car, {
-    foreignKey: 'lessor_id'
-});
 
-Order.belongsTo(Car, {
-    foreignKey: 'car_id'
+Contact.hasMany(Lessor, {
+    foreignKey: 'contact_id'
+});
+Lessor.belongsTo(Contact, {
+    foreignKey: 'contact_id'
 });
 
 Car.hasMany(Order, {
     foreignKey: 'car_id'
 });
-
-
+Order.belongsTo(Car, {
+    foreignKey: 'car_id'
+});
 
 app.use(cors());//allow Angular to access the node js
 app.use(express.json())//middleware
@@ -104,7 +109,7 @@ app.get('/car',(req,res)=>{
 })
 
 //tab1 - diaplay cars that are not rented
-app.get('/car',(req,res)=>{
+app.get('/car_available',(req,res)=>{
     let data={
         where:{
             rented: false 
@@ -163,7 +168,7 @@ app.patch('/car/:id',(req,res)=>{
     Car.findByPk(id).then((result)=>{
         console.log(result);
         result.rented = req.body.rented;
-        //save the upsate to the DB
+        //save the update to the DB
         result.save().then(()=>{
             res.status(200).send('car rented update successful!');
         }).catch((err)=>{
@@ -239,5 +244,61 @@ app.post('/order',(req,res)=>{
         res.status(200).send(result);
     }).catch((err)=>{
         res.status(500).send(err);
+    })
+})
+
+app.delete('/delete_order/:id',(req,res)=>{
+    let id = parseInt(req.params.id);
+    Order.findByPk(id).then((result)=>{
+        result.destroy().then(()=>{
+            res.status(200).send('delete successful!');
+        }).catch((err)=>{
+            res.status(400).send(err);
+        })
+    }).catch((err)=>{
+        res.status(400).send(err);
+    })
+})
+
+//----------------------Contacts Table
+
+//find contacts belonging to the current user based on the user email
+app.get('/contact_user/:lessor_email',(req,res)=>{
+    let data={
+        where:{
+            lessor_email: req.params.lessor_email
+        }
+    }
+    Contact.findAll(data).then((result)=>{
+        console.log(result);
+        res.status(200).send(result);
+    }).catch((err)=>{
+        res.status(500).send(err);
+    })
+})
+
+
+app.post('/contact',(req,res)=>{
+   Contact.create(req.body).then((result)=>{
+        res.status(200).send(result);
+    }).catch((err)=>{
+        res.status(500).send(err);
+    })
+})
+
+//Update the lessor_email value in contact table
+app.patch('/contact/:id',(req,res)=>{
+    let contact_id = parseInt(req.params.id);
+    Contact.findByPk(contact_id).then((result)=>{
+        console.log(result);
+        result.lessor_email = req.body.lessor_email;
+        //save the update to the DB
+        result.save().then(()=>{
+            res.status(200).send('contact lessor_email update successful!');
+        }).catch((err)=>{
+            res.status(400).send(err);
+        })
+    }).catch((err)=>{
+        res.status(400).send(err);
     })
 })

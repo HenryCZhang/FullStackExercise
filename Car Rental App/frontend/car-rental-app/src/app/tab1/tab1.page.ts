@@ -15,24 +15,28 @@ import { Router } from '@angular/router';
 export class Tab1Page {
 
   cars:Car[];
+  carID;
   orderForm;
-  toggled=false;
+  current_user
 
-  constructor(private menu: MenuController, private carService:CarService,public toastController: ToastController, private alertController:AlertController,private builder:FormBuilder,private userService:UserService,private orderService:OrderService,private router:Router) { 
-      this.orderForm = builder.group({
-        car_id:[],
-        client_firstname:[`${userService.get_current_user().first_name}`],
-        client_lastname:[`${userService.get_current_user().last_name}`],
-        client_email:[`${userService.get_current_user().email}`],
-        start_date:['',[Validators.required]],
-        end_date:['',[Validators.required]],
-        // client_picture:[]
-      })
+  constructor(private menu: MenuController, private carService:CarService,public toastController: ToastController, private alertController:AlertController,private builder:FormBuilder,private userService:UserService,private orderService:OrderService, private router:Router) { 
+    //get current user
+    this.current_user = userService.get_current_user();
+
+    this.orderForm = builder.group({
+      car_id:[],///this.car.id
+      client_firstname:[`${userService.get_current_user().first_name}`],
+      client_lastname:[`${userService.get_current_user().last_name}`],
+      client_email:[`${userService.get_current_user().email}`],
+      start_date:['',[Validators.required]],
+      end_date:['',[Validators.required]],
+      // client_picture:[]
+    })
   }
 
   //get all the cars in the DB
   ionViewWillEnter(){
-    this.carService.get_car().subscribe((result)=>{
+    this.carService.get_car_available().subscribe((result)=>{
       this.cars=result;
     },(err)=>{
       console.log(err);
@@ -84,24 +88,29 @@ export class Tab1Page {
     await alert.present();
   }
 
+  ownerRelation(car){
+    if(car.lessor_id == this.current_user.id){
+      return true;
+    }
+  }
 
   async placeOrder(car){
-    // this.orderForm.car_id = car_id; ??? how to pass this car id into carForm?
-    // this.carService.update_rented(car_id,true);//update car rented value!
-    car.rented = !car.rented;
-    this.carService.update_rented(car.id,car.rented).subscribe((result)=>{
-      console.log(result);
-    },(err)=>{
-      console.log(err);
-    })
-    this.router.navigate(['']);//auto refresh page to see changes
-    this.orderService.add_order(this.orderForm.value).subscribe((result)=>{
-      console.log(result);
-      this.showMessage('Order has been placed');
-    },(err)=>{
-      console.log(err);
-      this.showMessage("Err! Order could not be placed");
-    })
+    // this.carID=car.id; //??? how to pass this car id into carForm?
+    //if orderForm.car_id is null, alert: please type in the car id && this.orderForm.start_date && this.orderForm.end_date
+      this.carService.update_rented(car.id,car.rented).subscribe((result)=>{
+        car.rented = !car.rented;
+        console.log(result);
+      },(err)=>{
+        console.log(err);
+      })
+      this.router.navigate(['']);//auto refresh page to see changes - not working
+      this.orderService.add_order(this.orderForm.value).subscribe((result)=>{
+        console.log(result);
+        this.showMessage('Order has been placed');
+      },(err)=>{
+        console.log(err);
+        this.showMessage("Err! Order could not be placed");
+      })
   }
 
   get  start_dateFormControl(){

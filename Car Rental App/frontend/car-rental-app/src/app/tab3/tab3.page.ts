@@ -59,11 +59,10 @@ export class Tab3Page {
           handler: () => {
             this.carService.delete_car(car.id).subscribe((result)=>{
               console.log(result);
+              this.showMessage("Car has been deleted");
             },(err)=>{
               console.log(err);
             });
-            this.showMessage("Car has been deleted");
-            this.router.navigate(['/tabs/tab3']);//doesn't refresh the page!!!
           }
         },
       ]

@@ -51,7 +51,6 @@ export class AddCarPage implements OnInit {
       console.log(err);
       this.showMessage('Err! Add car unsuccessful');
     })
-    // this.showMessage('Add car successful');
   }
 
   get  lessor_idFormControl(){

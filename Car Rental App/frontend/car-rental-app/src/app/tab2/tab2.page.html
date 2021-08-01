@@ -9,16 +9,6 @@
 <ion-content [fullscreen]="true">
  <!--TODO: display a list of orders -->
  <ion-list *ngFor="let order of orders" >
-   <div class="order">
-    <h3>Order ID:{{order.id}}</h3>
-    <h3>Car ID:{{order.car_id}}</h3>
-    <h3>Order Start Date:{{order.start_date}}</h3>
-    <h3>Order End Date:{{order.end_date}}</h3>
-   </div>
- </ion-list> 
-
-  <!-- car list ordered by the days left -->
-  <!--person 1-->
   <div class="container">
     <div class="row">
       <div class="col">
@@ -26,7 +16,8 @@
         <!-- TODO: the color of the label and progression bar corresponds to the days left -->
         <ion-label class='reminder' color='danger'>2 days till return</ion-label>
         <ion-progress-bar value="0.2" reversed='true' color='danger'></ion-progress-bar>
-        <p>Return Location: 321 Mill St, London, ON N6H CP0</p>
+        <h1>{{order.Car.model}}, {{order.Car.model_year}}</h1>
+        <p>Return Date: {{order.end_date | date}}</p>
       </div>
       <div class="col">
         <ion-card-content class='message-avatar'>
@@ -36,74 +27,17 @@
               <img src="../../assets/message - avatar/jacob.png">
             </ion-avatar>
             <ion-label>
-              <h2>Jacob</h2>
-              <h3>jacob123@gmail.com</h3>
-              <p>Are you still interested in my offer?</p>
+              <h2>{{order.Car.Lessor.first_name}} {{order.Car.Lessor.last_name}}</h2>
+              <h3>{{order.Car.Lessor.email}}</h3>
             </ion-label>
           </ion-item>
-          <ion-button color="warning">Keep Contact</ion-button>
+          <ion-button color="warning" (click)="keepContact(order.Car.Lessor.id)">Keep Contact</ion-button>
+          <ion-button color="danger" (click)="deleteOrder(order.id,order.Car)">Delete Order</ion-button>
         </ion-card-content>
       </div>
     </div>
   </div>
-
-  <!--person 1-->
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <img class='carImg' src="../../assets/civic/toyota-camry-trd-2021-01-angle--exterior--front--white.jpeg" />
-        <!-- TODO: the color of the label and progression bar corresponds to the days left -->
-        <ion-label class='reminder' color='primary'>14 days till return</ion-label>
-        <ion-progress-bar value="0.5" reversed='true' color='primary'></ion-progress-bar>
-        <p>Return Location: 321 Mill St, London, ON N6H CP0</p>
-      </div>
-      <div class="col">
-        <ion-card-content class='message-avatar'>
-          <h1>Owner:</h1>
-          <ion-item>
-            <ion-avatar slot="start">
-              <img src="../../assets/message - avatar/jacob.png">
-            </ion-avatar>
-            <ion-label>
-              <h2>Jacob</h2>
-              <h3>jacob123@gmail.com</h3>
-              <p>Are you still interested in my offer?</p>
-            </ion-label>
-          </ion-item>
-          <ion-button color="warning">Keep Contact</ion-button>
-        </ion-card-content>
-      </div>
-    </div>
-  </div>
-
-  <!--person 2-->
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <img class='carImg' src="../../assets/sports/2020-ford-mustang-shelby-gt350-heritage-edition-3.jpeg"/>
-        <!-- TODO: the color of the label and progression bar corresponds to the days left -->
-        <ion-label class='reminder' color='primary'>40 days till return</ion-label>
-        <ion-progress-bar value="0.8" reversed='true' color='primary'></ion-progress-bar>
-        <p>Return Location: 321 Mill St, London, ON N6H CP0</p>
-      </div>
-      <div class="col">
-        <ion-card-content class='message-avatar'>
-          <h1>Owner:</h1>
-          <ion-item>
-            <ion-avatar slot="start">
-              <img src="../../assets/message - avatar/channel.png">
-            </ion-avatar>
-            <ion-label>
-              <h2>Emily</h2>
-              <h3>jacob123@gmail.com</h3>
-              <p>Are you still interested in my offer?</p>
-            </ion-label>
-          </ion-item>
-          <ion-button color="warning">Keep Contact</ion-button>
-        </ion-card-content>
-      </div>
-    </div>
-  </div>
+ </ion-list> 
       
 </ion-content>
 

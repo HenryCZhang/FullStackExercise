@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const config = require('../config');
 
-const Lessor = config.define('Lessors',{
+const Contact = config.define('Contacts',{
     id:{
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -16,14 +16,15 @@ const Lessor = config.define('Lessors',{
         type: Sequelize.STRING,
         allowNull: false
     },
-    password: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
     email: {
         type: Sequelize.STRING,
         allowNull: false
     },
+    lessor_email: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
+
 },{timestamps:false});
 
-module.exports = Lessor;
+module.exports = Contact;

@@ -56,16 +56,36 @@
         This field is required
       </ion-item>
 
-      <div class="mb-3">
-        <label class="form-label">Confirm Password</label>
-        <input type="password" class="form-control" formControlName="password">
+      <!-- <div class="mb-3">
+        <label class="form-label">Confirm Password (no function)</label>
+        <input type="password" class="form-control" formControlName="confirmPassword">
       </div>
-      <ion-item *ngIf="passwordFormControl.touched && passwordFormControl.errors?.required" color="danger">
-        This field is required
-      </ion-item>
 
-  
+      <ion-item *ngIf="confirm_passwordFormControl.touched && registerForm.hasError('mismatchedPasswords')" color="danger">
+        Please enter the same password
+      </ion-item> -->
+
       <button type="submit" class="btn btn-primary" (click)="register()" [disabled]='registerForm.invalid'>Submit</button>
    </form>
+
+   <!--Contact Table-->
+   <form [formGroup]="registerForm_contact">
+    <div class="mb-3">
+        <label class="form-label">First Name</label>
+        <input type="text" class="form-control" formControlName="first_name">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Last Name</label>
+        <input type="text" class="form-control" formControlName="last_name">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Email address</label>
+        <input type="email" class="form-control" formControlName="email">
+    </div>
+    
+    <button type="submit" class="btn btn-primary" (click)="addContact()" >Add Contact</button>
+ </form>
   </ion-content>
 </div>

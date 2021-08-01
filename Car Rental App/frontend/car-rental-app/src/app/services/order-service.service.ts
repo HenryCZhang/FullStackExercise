@@ -14,6 +14,10 @@ export class OrderService {
     return this.http.post("http://localhost:8000/order",data);
   }
 
+  delete_order(order_id){
+    return this.http.delete("http://localhost:8000/delete_order/"+order_id);
+  }
+
   get_order_byUser(user_email):Observable<Order[]>{
     return this.http.get<Order[]>("http://localhost:8000/order_user/"+user_email);
   }

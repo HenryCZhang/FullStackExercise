@@ -40,27 +40,25 @@
     </ion-item> 
 
     <form [formGroup]='orderForm'>
-    <ion-item>
-      <ion-label position="stacked">Start Date:</ion-label>
-      <ion-input type="datetime-local" formControlName='start_date'></ion-input>
-    </ion-item>
-    <ion-item *ngIf="start_dateFormControl.touched && start_dateFormControl.errors?.required" color="danger">
-      This field is required
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="stacked">End Date:</ion-label>
-      <ion-input type="datetime-local" formControlName='end_date'></ion-input>
-    </ion-item>
-    <ion-item *ngIf="end_dateFormControl.touched && end_dateFormControl.errors?.required" color="danger">
-      This field is required
-    </ion-item>
-
-    <!-- test ~ TODO: pass the car id into the carForm automatically -->
-    <ion-item>
-      <ion-label>Car ID: (to be fixed)</ion-label>
-      <ion-input type="number" formControlName='car_id'></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Start Date:</ion-label>
+        <ion-input type="datetime-local" formControlName='start_date'></ion-input>
+      </ion-item>
+      <ion-item *ngIf="start_dateFormControl.touched && start_dateFormControl.errors?.required" color="danger">
+        This field is required
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">End Date:</ion-label>
+        <ion-input type="datetime-local" formControlName='end_date'></ion-input>
+      </ion-item>
+      <ion-item *ngIf="end_dateFormControl.touched && end_dateFormControl.errors?.required" color="danger">
+        This field is required
+      </ion-item>
+      <!-- test ~ TODO: pass the car id into the carForm automatically -->
+      <ion-item>
+        <ion-label>Car ID: (to be fixed)</ion-label>
+        <ion-input type="number" formControlName='car_id'></ion-input>
+      </ion-item>
     </form>
 
     <ion-button color='dark'>Search (no function yet)</ion-button>  
@@ -77,11 +75,10 @@
             <ion-card-title>Seats: {{car.seats}}</ion-card-title>
             <ion-card-title>Type: {{car.type}}</ion-card-title>
             <ion-card-title >Car ID: {{car.id}}</ion-card-title>
-            <ion-card-title>Lessor ID: {{car.lessor_id}}</ion-card-title>
           </div>
         </ion-card-content>
-        <ion-button color="dark">Contact Owner</ion-button>
-        <ion-button color="warning" (click)="placeOrder(car)" [disabled]='car.rented'>Place Order</ion-button>
+        <ion-button color="dark" [hidden]='ownerRelation(car)'>Contact Owner</ion-button>
+        <ion-button color="warning" (click)="placeOrder(car)" [disabled]='car.rented' [hidden]='ownerRelation(car)'>Place Order</ion-button>
       </ion-card>
     </ion-list> 
 
