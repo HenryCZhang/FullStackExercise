@@ -24,6 +24,10 @@ const Order = config.define('Orders',{
         type: Sequelize.STRING,
         allowNull: false
     },
+    client_picture: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
     start_date: {
         type: Sequelize.DATE,
         allowNull: false

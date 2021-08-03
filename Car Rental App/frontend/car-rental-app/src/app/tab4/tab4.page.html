@@ -1,6 +1,7 @@
 <ion-item>
   <ion-avatar slot="start">
-    <img src={{user_img_src}}>
+    <!-- testing -->
+    <a routerLink="/edit-profile" routerLinkActive="active"><img src={{user_img_src}}></a>
   </ion-avatar>
   <ion-label>
     <h2>{{current_user.first_name}} {{current_user.last_name}}</h2>

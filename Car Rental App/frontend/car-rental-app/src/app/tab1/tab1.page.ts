@@ -28,6 +28,7 @@ export class Tab1Page {
       client_firstname:[`${userService.get_current_user().first_name}`],
       client_lastname:[`${userService.get_current_user().last_name}`],
       client_email:[`${userService.get_current_user().email}`],
+      client_picture:[`${userService.get_current_user().lessor_picture}`],
       start_date:['',[Validators.required]],
       end_date:['',[Validators.required]],
     })

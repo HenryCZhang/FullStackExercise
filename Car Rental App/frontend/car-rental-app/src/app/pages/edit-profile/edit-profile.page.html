@@ -22,27 +22,26 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title>Add New Car</ion-title>
+      <ion-title>My Profile</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-content class="ion-padding">
-    
     <form>
 
       <div class="mb-3">
-        <label class="form-label">Add/Change Phone Number:</label>
-        <input type="number" [(ngModel)]='phone_number' name="phone_number">
+        <label for="phone_number" class="form-label">Add/Change Phone Number:</label>
+        <input type="number" class="form-control" [(ngModel)]='phone_number' name="phone_number">
       </div>
             
-      <ion-button color='dark' (click)='updatePhoneNumber()'>Add/Change</ion-button>  
+      <ion-button color='primary' (click)='updatePhoneNumber()'>Change Phone Number</ion-button>  
 
       <div class="mb-3">
         <label class="form-label">Profile Picture:</label>
         <input type="file" class="form-control" (change)="onFileChange($event)" [(ngModel)]='profile_picture' name="profile_picture">
       </div>
       
-      <ion-button color='dark' (click)='updateProfilePicture()'>Change</ion-button>  
+      <ion-button color='primary' (click)='updateProfilePicture()'>Change Profile Picture</ion-button>  
 
    </form>
 

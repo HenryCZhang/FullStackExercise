@@ -15,5 +15,8 @@
     "multer": "^1.4.2",
     "mysql2": "^2.2.5",
     "sequelize": "^6.6.5"
+  },
+  "config": {
+    "ionic_sass": "./sass.config.js"
   }
 }

@@ -8,10 +8,14 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './my-contact.page.html',
   styleUrls: ['./my-contact.page.scss'],
 })
-export class MyContactPage {
+export class MyContactPage implements OnInit {
 
   contacts;
   current_user;
+
+  ngOnInit() {
+    this.getContacts();//not working
+  }
 
   constructor(private userService:UserService, public contactService:ContactService, private toastController: ToastController, private alertController: AlertController) {
     this.current_user = userService.get_current_user();
@@ -56,5 +60,4 @@ export class MyContactPage {
     });
   }
   
-
 }

@@ -136,7 +136,22 @@ app.get('/car_available',(req,res)=>{
         res.status(500).send(err);
     })
 })
-//find cars belonging to the current user 
+
+//find cars available - based on dates
+app.get('/car/filter',(req,res)=>{
+    let data={
+        where:{
+            //availibility condition
+        }
+    }
+    Car.findAll(data).then((result)=>{
+        res.status(200).send(result);
+    }).catch((err)=>{
+        res.status(500).send(err);
+    })
+})
+
+//Tab3: find cars belonging to the current user 
 app.get('/car_lessor/:id',(req,res)=>{
     let lessor_id = parseInt(req.params.id);
     let data={
@@ -218,20 +233,6 @@ app.delete('/delete_car/:id',(req,res)=>{
         })
     }).catch((err)=>{
         res.status(400).send(err);
-    })
-})
-
-//find cars available - based on dates
-app.get('/car/filter',(req,res)=>{
-    let data={
-        where:{
-            //availibility condition
-        }
-    }
-    Car.findAll(data).then((result)=>{
-        res.status(200).send(result);
-    }).catch((err)=>{
-        res.status(500).send(err);
     })
 })
 
