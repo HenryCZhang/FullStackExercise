@@ -1,6 +1,6 @@
 <ion-item>
   <ion-avatar slot="start">
-    <img src="../../assets/message - avatar/henry.png">
+    <img src={{user_img_src}}>
   </ion-avatar>
   <ion-label>
     <h2>{{current_user.first_name}} {{current_user.last_name}}</h2>
@@ -12,7 +12,7 @@
 <ion-content [fullscreen]="true">
 
   <ion-text>
-    <h3 class="nav">Change Profile (no function yet)</h3>
+    <a routerLink="/edit-profile" routerLinkActive="active"><h3 class="nav">Change Profile</h3></a>
     <a routerLink="/my-contact" routerLinkActive="active"><h3 class="nav">View Saved Contact</h3></a>
     <a routerLink="/add-car" routerLinkActive="active"><h3 class="nav">Add Car</h3></a>
   </ion-text>

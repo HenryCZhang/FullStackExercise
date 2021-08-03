@@ -6,8 +6,14 @@ const Order = require('./models/order');
 const Lessor = require('./models/lessor');
 const Contact = require('./models/contact');
 const cors = require('cors');
+const multer = require('multer');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+
+
+app.use(cors());//allow Angular to access the node js
+app.use(express.json())//middleware
+app.use('/images', express.static('uploads')); //making the uploads folder publicly accessible
 
 //FK Cascade
 Lessor.hasMany(Car, {
@@ -32,20 +38,27 @@ Order.belongsTo(Car, {
     foreignKey: 'car_id'
 });
 
-app.use(cors());//allow Angular to access the node js
-app.use(express.json())//middleware
-
 config.authenticate().then(()=>{
     console.log('database connected');
 }).catch((err)=>{
     console.log(err);
 })
 
+//Configuring our upload folder and upload filename
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './uploads');
+      },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
+
 app.listen(8000,()=>{
     console.log('listening on port 8000');
 })
 
-app.post('/register', function(req, res){
+app.post('/register',multer({storage}).single('lessor_picture'), function(req, res){
 
     let plainPassword = req.body.password;
 
@@ -55,7 +68,8 @@ app.post('/register', function(req, res){
             first_name: req.body.first_name,
             last_name: req.body.last_name,
             email: req.body.email,
-            password: hash
+            password: hash,
+            lessor_picture: req.file ? req.file.filename : null
         };
 
         Lessor.create(user_data).then((result) => {
@@ -113,7 +127,8 @@ app.get('/car_available',(req,res)=>{
     let data={
         where:{
             rented: false 
-        }
+        },
+        include: Lessor
     }
     Car.findAll(data).then((result)=>{
         res.status(200).send(result);
@@ -154,8 +169,22 @@ app.get('/car_order/:id',(req,res)=>{
     })
 })
 
-app.post('/car',(req,res)=>{
-    Car.create(req.body).then((result)=>{
+app.post('/car',multer({storage}).single('car_picture'),(req,res)=>{
+    let car_data = {
+        lessor_id:req.body.lessor_id,
+        seats:req.body.seats,
+        type:req.body.type,
+        make:req.body.make,
+        model:req.body.model,
+        model_year:req.body.model_year,
+        start_date:req.body.start_date,
+        end_date:req.body.end_date,
+        country:req.body.country,
+        city:req.body.city,
+        return_location:req.body.return_location,
+        car_picture: req.file ? req.file.filename : null
+    };
+    Car.create(car_data).then((result)=>{
         res.status(200).send(result);
     }).catch((err)=>{
         res.status(500).send(err);
@@ -170,7 +199,7 @@ app.patch('/car/:id',(req,res)=>{
         result.rented = req.body.rented;
         //save the update to the DB
         result.save().then(()=>{
-            res.status(200).send('car rented update successful!');
+            res.status(200).send('car rented update successful!');//an err here!
         }).catch((err)=>{
             res.status(400).send(err);
         })
@@ -215,6 +244,39 @@ app.get('/lessor',(req,res)=>{
     })
 })
 
+//Update phone number by lessor ID
+app.patch('/lessor_phone_number/:id',(req,res)=>{
+    let id = parseInt(req.params.id);
+    Lessor.findByPk(id).then((result)=>{
+        console.log(result);
+        result.phone_number = req.body.phone_number;
+        //save the update to the DB
+        result.save().then(()=>{
+            res.status(200).send('lessor phone number update successful!');
+        }).catch((err)=>{
+            res.status(400).send(err);
+        })
+    }).catch((err)=>{
+        res.status(400).send(err);
+    })
+})
+
+//Update the lessor_picture in Lessor Table for editProfile page
+app.patch('/lessor_picture/:id',(req,res)=>{
+    let id = parseInt(req.params.id);
+    Lessor.findByPk(id).then((result)=>{
+        console.log(result);
+        result.lessor_picture = req.body.lessor_picture;
+        //save the update to the DB
+        result.save().then(()=>{
+            res.status(200).send('lessor_picture update successful!');
+        }).catch((err)=>{
+            res.status(400).send(err);
+        })
+    }).catch((err)=>{
+        res.status(400).send(err);
+    })
+})
 
 //----------------------Orders Table
 
@@ -267,7 +329,8 @@ app.get('/contact_user/:lessor_email',(req,res)=>{
     let data={
         where:{
             lessor_email: req.params.lessor_email
-        }
+        },
+        include: Lessor
     }
     Contact.findAll(data).then((result)=>{
         console.log(result);
@@ -295,6 +358,23 @@ app.patch('/contact/:id',(req,res)=>{
         //save the update to the DB
         result.save().then(()=>{
             res.status(200).send('contact lessor_email update successful!');
+        }).catch((err)=>{
+            res.status(400).send(err);
+        })
+    }).catch((err)=>{
+        res.status(400).send(err);
+    })
+})
+
+//Update the contact_picture value in contact table when adding a contact in tab2
+app.patch('/contact_picture/:id',(req,res)=>{
+    let contact_id = parseInt(req.params.id);
+    Contact.findByPk(contact_id).then((result)=>{
+        console.log(result);
+        result.contact_picture = req.body.contact_picture;
+        //save the update to the DB
+        result.save().then(()=>{
+            res.status(200).send('contact contact_picture update successful!');
         }).catch((err)=>{
             res.status(400).send(err);
         })

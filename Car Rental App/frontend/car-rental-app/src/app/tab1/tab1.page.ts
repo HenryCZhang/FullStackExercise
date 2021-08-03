@@ -30,7 +30,6 @@ export class Tab1Page {
       client_email:[`${userService.get_current_user().email}`],
       start_date:['',[Validators.required]],
       end_date:['',[Validators.required]],
-      // client_picture:[]
     })
   }
 
@@ -88,29 +87,50 @@ export class Tab1Page {
     await alert.present();
   }
 
+  //hide the contact-owner and place-order buttons if the user owns the car
   ownerRelation(car){
     if(car.lessor_id == this.current_user.id){
       return true;
     }
   }
 
+  async contactOwner(car){
+    console.log(`${car.Lessor.first_name} ${car.Lessor.last_name} \n ${car.Lessor.email} \n ${car.Lessor.lessor_picture} \n  ${car.Lessor.phone_number}`)
+    const alert = await this.alertController.create({
+      message: `<img src="http://localhost:8000/images/${car.Lessor.lessor_picture}" style="width:10px"> \n ${car.Lessor.first_name} ${car.Lessor.last_name} \n ${car.Lessor.email} \n ${car.Lessor.phone_number}`,
+      cssClass: 'alertMessage',//not working
+      buttons: [
+        {
+          text: 'ok'
+        },
+      ]
+    });
+    await alert.present();
+  }
+
   async placeOrder(car){
-    // this.carID=car.id; //??? how to pass this car id into carForm?
-    //if orderForm.car_id is null, alert: please type in the car id && this.orderForm.start_date && this.orderForm.end_date
-      this.carService.update_rented(car.id,car.rented).subscribe((result)=>{
-        car.rented = !car.rented;
-        console.log(result);
-      },(err)=>{
-        console.log(err);
-      })
-      this.router.navigate(['']);//auto refresh page to see changes - not working
-      this.orderService.add_order(this.orderForm.value).subscribe((result)=>{
-        console.log(result);
-        this.showMessage('Order has been placed');
-      },(err)=>{
-        console.log(err);
-        this.showMessage("Err! Order could not be placed");
-      })
+
+    let car_id=car.id;
+    this.orderForm.patchValue({
+      car_id: car_id
+    });  
+
+    //need guard condition when dates are not entered
+    car.rented = !car.rented;
+
+    this.carService.update_rented(car.id,car.rented).subscribe((result)=>{
+      console.log(result);
+    },(err)=>{
+      console.log(err);
+    })
+    this.router.navigate(['']);//auto refresh page to see changes - not working
+    this.orderService.add_order(this.orderForm.value).subscribe((result)=>{
+      console.log(result);
+      this.showMessage('Order has been placed');
+    },(err)=>{
+      console.log(err);
+      this.showMessage("Err! Order could not be placed");
+    })
   }
 
   get  start_dateFormControl(){

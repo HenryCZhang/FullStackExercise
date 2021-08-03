@@ -25,6 +25,14 @@ export class UserService {
     return JSON.parse(localStorage.getItem('currentUser'));//before: localStorage.getItem('currentUser')!
   }
 
+  update_lessor_phone_number(lessor_id,phone_number){
+    return this.http.patch("http://localhost:8000/lessor_phone_number/"+lessor_id,{phone_number});
+  }
+
+  update_lessor_picture(lessor_id,lessor_picture){
+    return this.http.patch("http://localhost:8000/lessor_picture/"+lessor_id,{lessor_picture});
+  }
+
   isAuthenticated(){
     return this.get_current_user() ? true: false;
   }

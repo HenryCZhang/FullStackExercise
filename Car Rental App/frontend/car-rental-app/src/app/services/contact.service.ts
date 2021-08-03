@@ -23,6 +23,10 @@ export class ContactService {
     return this.http.patch("http://localhost:8000/contact/"+contact_id,{lessor_email});
   }
 
+  update_contact_picture(contact_id,contact_picture){
+    return this.http.patch("http://localhost:8000/contact_picture/"+contact_id,{contact_picture});
+  }
+
   delete_contact(contact_id,lessor_email){
     return this.http.patch("http://localhost:8000/contact/"+contact_id,{lessor_email});//remove the lessor_email
   }

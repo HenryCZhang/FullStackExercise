@@ -7,12 +7,11 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
- <!--TODO: display a list of orders -->
  <ion-list *ngFor="let order of orders" >
   <div class="container">
     <div class="row">
       <div class="col">
-        <img class='carImg' src="../../assets/sports/2020-porsche-718_100757785.jpeg" />
+        <img class='carImg' src="http://localhost:8000/images/{{order.Car.car_picture}}" />
         <!-- TODO: the color of the label and progression bar corresponds to the days left -->
         <ion-label class='reminder' color='danger'>2 days till return</ion-label>
         <ion-progress-bar value="0.2" reversed='true' color='danger'></ion-progress-bar>
@@ -24,20 +23,19 @@
           <h1>Owner:</h1>
           <ion-item>
             <ion-avatar slot="start">
-              <img src="../../assets/message - avatar/jacob.png">
+              <img src='http://localhost:8000/images/{{order.Car.Lessor.lessor_picture}}'>
             </ion-avatar>
             <ion-label>
               <h2>{{order.Car.Lessor.first_name}} {{order.Car.Lessor.last_name}}</h2>
               <h3>{{order.Car.Lessor.email}}</h3>
             </ion-label>
           </ion-item>
-          <ion-button color="warning" (click)="keepContact(order.Car.Lessor.id)">Keep Contact</ion-button>
+          <ion-button color="warning" (click)="keepContact(order.Car.Lessor)">Keep Contact</ion-button>
           <ion-button color="danger" (click)="deleteOrder(order.id,order.Car)">Delete Order</ion-button>
         </ion-card-content>
       </div>
     </div>
   </div>
  </ion-list> 
-      
 </ion-content>
 

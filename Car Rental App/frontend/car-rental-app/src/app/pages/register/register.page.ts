@@ -19,9 +19,11 @@ export class RegisterPage implements OnInit {
       first_name: ['', [Validators.required]],
       last_name: ['', [Validators.required]],
       email: ['', [Validators.required]],
-      password: ['', [Validators.required]]
+      password: ['', [Validators.required]],
+      lessor_picture: ['', [Validators.required]]
     }); 
 
+    //*--------------comfirm password - particially working ----------------*/
     // this.registerForm = formBuilder.group({
     //   first_name: ['', Validators.required],
     //   last_name: ['', Validators.required],
@@ -41,6 +43,13 @@ export class RegisterPage implements OnInit {
   ngOnInit(): void {
   }
 
+  onFileChange(event:any) {  
+    const file = event.target.files[0];
+    this.registerForm.patchValue({
+      lessor_picture: file
+    });    
+  }
+
   matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
     return (group: FormGroup): {[key: string]: any} => {
       let password = group.controls[passwordKey];
@@ -56,7 +65,13 @@ export class RegisterPage implements OnInit {
 
   register(){
     let formData = this.registerForm.value;
-    this.service.register(formData).subscribe((result) => {
+    let f = new FormData();
+    //Transfer of all formgroup data into the FormData object;
+    for(let k in formData)
+    {
+      f.append(k, formData[k]);
+    }
+    this.service.register(f).subscribe((result) => {
       alert('Register successful!');
     }, (err) => {
       alert('Register failed! ');
@@ -65,16 +80,16 @@ export class RegisterPage implements OnInit {
   }
 
   addContact(){
-   //create a new contact in the contact table
-   let contact_formData = this.registerForm_contact.value;
-   this.contactService.add_contact(contact_formData).subscribe((result) => {
-     alert('Created contact successful!');
-     //nav to the login page
-     this.router.navigate(['']);//app-routing.module
-   }, (err) => {
-     alert('Created contact failed! ');
-     console.log(err);
-   });
+    //create a new contact in the contact table
+    let contact_formData = this.registerForm_contact.value;
+    this.contactService.add_contact(contact_formData).subscribe((result) => {
+      alert('Created contact successful!');
+      //nav to the login page
+      this.router.navigate(['']);//app-routing.module
+    }, (err) => {
+      alert('Created contact failed! ');
+      console.log(err);
+    });
   }
 
   get  first_nameFormControl(){

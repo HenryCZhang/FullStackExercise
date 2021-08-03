@@ -13,5 +13,6 @@ export interface Car {
     status:string;
     toggled:boolean;
     return_location:string;
+    car_picture:string;
     rented:boolean;
 }

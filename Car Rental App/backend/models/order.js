@@ -32,10 +32,10 @@ const Order = config.define('Orders',{
         type: Sequelize.DATE,
         allowNull: false
     },
-    client_picture:{
-        type:Sequelize.STRING,
-        allowNull: true
-    }
+    // client_picture:{
+    //     type:Sequelize.STRING,
+    //     allowNull: true
+    // }
 },{timestamps:false});
 
 module.exports = Order;

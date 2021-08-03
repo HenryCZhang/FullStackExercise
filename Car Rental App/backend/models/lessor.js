@@ -24,6 +24,14 @@ const Lessor = config.define('Lessors',{
         type: Sequelize.STRING,
         allowNull: false
     },
+    lessor_picture:{
+        type: Sequelize.STRING,
+        allowNull: true,
+    },
+    phone_number:{
+        type: Sequelize.STRING,
+        allowNull: true,
+    }
 },{timestamps:false});
 
 module.exports = Lessor;

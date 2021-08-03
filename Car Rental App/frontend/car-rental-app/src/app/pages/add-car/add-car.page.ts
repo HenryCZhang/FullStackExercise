@@ -27,10 +27,18 @@ export class AddCarPage implements OnInit {
      model_year:['',[Validators.required]],
      start_date:['',[Validators.required]],
      end_date:['',[Validators.required]],
+     car_picture:['',[Validators.required]],
    })
   }
 
   ngOnInit() {
+  }
+
+  onFileChange(event:any) {  
+    const file = event.target.files[0];
+    this.carForm.patchValue({
+      car_picture: file
+    });    
   }
 
   async showMessage(message) {
@@ -42,8 +50,16 @@ export class AddCarPage implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.carForm.value);
-    this.carService.add_car(this.carForm.value).subscribe((result)=>{
+    let formData = this.carForm.value;
+    let f = new FormData();
+
+     //Transfer of all formgroup data into the FormData object;
+     for(let k in formData)
+     {
+       f.append(k, formData[k]);
+     }
+
+    this.carService.add_car(f).subscribe((result)=>{
       console.log(result);
       this.carForm.reset();//clear form data
       this.showMessage('Add car successful');

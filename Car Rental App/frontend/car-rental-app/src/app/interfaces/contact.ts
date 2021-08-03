@@ -4,4 +4,5 @@ export interface Contact {
     last_name:string;
     email:string;
     lessor_email:string;
+    contact_picture:string;
 }

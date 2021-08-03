@@ -1,7 +1,9 @@
 ion-title{
   text-align: center;
 }
-
+.ion-card-title-model{
+  text-align: center;
+}
 ion-button{
   width:100%;
  }
@@ -16,11 +18,8 @@ ion-button{
   height:auto;
 }
 
-// laptop view
-@media only screen and (min-width: 1000px) {
-    ion-card{
-    display: inline-block;
-
-  }
-
+.alertMessage{
+  color: black;
+  font-weight: bold;
+  text-align: center;
 }

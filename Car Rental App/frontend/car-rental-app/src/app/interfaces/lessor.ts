@@ -5,5 +5,5 @@ export interface Lessor {
     last_name:string;
     password:string;
     email:string;
-    contact_id:number;// login issue
+    phone_number:string;
 }

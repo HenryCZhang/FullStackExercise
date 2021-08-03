@@ -12,10 +12,13 @@ import {MyContactPage} from '../pages/my-contact/my-contact.page'
 export class Tab4Page {
 
   current_user;
+  user_img_src;
   loginActivated:boolean=false;
 
   constructor(private userService:UserService,private contactService:ContactService,public toastController: ToastController, private alertController:AlertController, private router:Router) {
     this.current_user = userService.get_current_user();
+    this.user_img_src = 'http://localhost:8000/images/'+this.current_user.lessor_picture;//user_picture src
+    console.log(this.user_img_src)//testing
   }
 
   async showMessage(message) {

@@ -24,7 +24,10 @@ const Contact = config.define('Contacts',{
         type: Sequelize.STRING,
         allowNull: true
     },
-
+    contact_picture: {
+        type: Sequelize.STRING,
+        allowNull: true
+    }
 },{timestamps:false});
 
 module.exports = Contact;

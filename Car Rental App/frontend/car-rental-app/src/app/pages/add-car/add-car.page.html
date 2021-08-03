@@ -132,10 +132,10 @@
         This field is required
       </ion-item>
 
-      <ion-item>
-        <ion-label position="stacked">Car Picture:</ion-label>
-        <ion-icon name="add-circle-outline"></ion-icon>
-      </ion-item>
+      <div class="mb-3">
+        <label class="form-label">Car Picture:</label>
+        <input type="file" class="form-control" (change)="onFileChange($event)">
+      </div>
       
       <ion-button color='dark' (click)='onSubmit()' [disabled]='carForm.invalid'>Add</ion-button>  
    </form>

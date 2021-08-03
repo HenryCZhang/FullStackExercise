@@ -30,9 +30,11 @@
   <ion-button (click)='getContacts()' class='view-contact-btn' color='dark'>View Saved Contact</ion-button>
 
   <ion-list *ngFor="let contact of contacts" >
+    {{contact.Lessors[0]}}
     <ion-item>
       <ion-avatar slot="start">
-        <img src="../../assets/message - avatar/peter.png">
+        <img src="http://localhost:8000/images/{{contact.contact_picture}}">
+        <img src=''>
       </ion-avatar>
       <ion-label>
         <h2>{{contact.first_name}} {{contact.last_name}}</h2>
