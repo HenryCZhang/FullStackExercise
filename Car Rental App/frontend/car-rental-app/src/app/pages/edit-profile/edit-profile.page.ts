@@ -18,6 +18,7 @@ export class EditProfilePage implements OnInit {
     this.current_user = userService.get_current_user();
 
     this.profileForm = formBuilder.group({
+      // phone_number: ['', [Validators.required]],
       profile_picture: ['', [Validators.required]]
     }); 
   }
@@ -45,21 +46,29 @@ export class EditProfilePage implements OnInit {
   updatePhoneNumber(){
     //if the phone_number is not null
     if(this.phone_number!=null){
-    this.userService.update_lessor_phone_number(this.current_user.id,this.phone_number).subscribe((result)=>{
-      console.log(result);
-      this.showMessage('Updated phone number successful');
-    },(err)=>{
-      console.log(err);
-      this.showMessage("Err! Failed to update phone number");
-    });
+      console.log(this.phone_number);//returns the correct phone number
+      let formData  = new FormData();
+      formData.append("phone_number", this.phone_number);
+      this.userService.update_lessor_phone_number(this.current_user.id,formData).subscribe((result)=>{
+        this.userService.updatePhoneNumber(this.phone_number);//todo
+        console.log(result);
+        this.showMessage('Updated phone number successful');
+      },(err)=>{
+        console.log(err);
+        this.showMessage("Err! Failed to update phone number");
+      });
+    }else{
+      console.log('this.profileForm.value.phone_number.name is empty');
+      console.log(this.phone_number);
     }
   }
 
   updateProfilePicture(){
     if(this.profileForm.value.profile_picture.name){
-      console.log(this.profileForm.value.profile_picture.name);//returns chanel.png
-      this.userService.update_lessor_picture(this.current_user.id,this.profileForm.value.profile_picture.name).subscribe((result)=>{
-        console.log(result);
+      let formData  = new FormData();
+      formData.append("profile_picture", this.profileForm.value.profile_picture);
+      this.userService.update_lessor_picture(this.current_user.id,formData).subscribe((result)=>{
+        this.userService.updateProfilePicture(this.profileForm.value.profile_picture.name);
         this.showMessage('Updated profile picture successful');
       },(err)=>{
         console.log(err);

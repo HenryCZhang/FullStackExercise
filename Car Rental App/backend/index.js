@@ -214,7 +214,7 @@ app.patch('/car/:id',(req,res)=>{
         result.rented = req.body.rented;
         //save the update to the DB
         result.save().then(()=>{
-            res.status(200).send('car rented update successful!');//an err here!
+            res.status(200).send(['car rented update successful!']);
         }).catch((err)=>{
             res.status(400).send(err);
         })
@@ -227,7 +227,7 @@ app.delete('/delete_car/:id',(req,res)=>{
     let id = parseInt(req.params.id);
     Car.findByPk(id).then((result)=>{
         result.destroy().then(()=>{
-            res.status(200).send('delete successful!');
+            res.status(200).send(['delete successful!']);
         }).catch((err)=>{
             res.status(400).send(err);
         })
@@ -246,14 +246,15 @@ app.get('/lessor',(req,res)=>{
 })
 
 //Update phone number by lessor ID
-app.patch('/lessor_phone_number/:id',(req,res)=>{
+app.patch('/lessor_phone_number/:id',multer({storage}).single('phone_number'),(req,res)=>{
     let id = parseInt(req.params.id);
     Lessor.findByPk(id).then((result)=>{
         console.log(result);
         result.phone_number = req.body.phone_number;
+        // result.phone_number = req.file ? req.file.filename : null ; //doesn't change DB value
         //save the update to the DB
         result.save().then(()=>{
-            res.status(200).send('lessor phone number update successful!');
+            res.status(200).send(['lessor phone number update successful!']);
         }).catch((err)=>{
             res.status(400).send(err);
         })
@@ -263,14 +264,13 @@ app.patch('/lessor_phone_number/:id',(req,res)=>{
 })
 
 //Update the lessor_picture in Lessor Table for editProfile page
-app.patch('/lessor_picture/:id',(req,res)=>{
+app.patch('/lessor_picture/:id',multer({storage}).single('profile_picture'),(req,res)=>{
     let id = parseInt(req.params.id);
     Lessor.findByPk(id).then((result)=>{
-        console.log(result);
-        result.lessor_picture = req.body.lessor_picture;
+        result.lessor_picture = req.file ? req.file.filename : null ;
         //save the update to the DB
         result.save().then(()=>{
-            res.status(200).send('lessor_picture update successful!');
+            res.status(200).send(['lessor_picture update successful!']);
         }).catch((err)=>{
             res.status(400).send(err);
         })
@@ -314,7 +314,7 @@ app.delete('/delete_order/:id',(req,res)=>{
     let id = parseInt(req.params.id);
     Order.findByPk(id).then((result)=>{
         result.destroy().then(()=>{
-            res.status(200).send('delete successful!');
+            res.status(200).send(['delete successful!']);
         }).catch((err)=>{
             res.status(400).send(err);
         })
@@ -358,7 +358,7 @@ app.patch('/contact/:id',(req,res)=>{
         result.lessor_email = req.body.lessor_email;
         //save the update to the DB
         result.save().then(()=>{
-            res.status(200).send('contact lessor_email update successful!');
+            res.status(200).send(['contact lessor_email update successful!']);
         }).catch((err)=>{
             res.status(400).send(err);
         })
@@ -375,7 +375,7 @@ app.patch('/contact_picture/:id',(req,res)=>{
         result.contact_picture = req.body.contact_picture;
         //save the update to the DB
         result.save().then(()=>{
-            res.status(200).send('contact contact_picture update successful!');
+            res.status(200).send(['contact contact_picture update successful!']);
         }).catch((err)=>{
             res.status(400).send(err);
         })

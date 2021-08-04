@@ -16,7 +16,11 @@ export class Tab4Page {
   loginActivated:boolean=false;
 
   constructor(private userService:UserService,private contactService:ContactService,public toastController: ToastController, private alertController:AlertController, private router:Router) {
-    this.current_user = userService.get_current_user();
+    
+  }
+
+  ionViewWillEnter(){
+    this.current_user = this.userService.get_current_user();
     this.user_img_src = 'http://localhost:8000/images/'+this.current_user.lessor_picture;//user_picture src
     console.log(this.user_img_src)//testing
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 import { ContactService } from 'src/app/services/contact.service';
 import { UserService } from 'src/app/services/user.service';
@@ -8,16 +9,16 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './my-contact.page.html',
   styleUrls: ['./my-contact.page.scss'],
 })
-export class MyContactPage implements OnInit {
+export class MyContactPage {
 
   contacts;
   current_user;
 
-  ngOnInit() {
-    this.getContacts();//not working
+  ionViewWillEnter(){
+    this.getContacts();
   }
 
-  constructor(private userService:UserService, public contactService:ContactService, private toastController: ToastController, private alertController: AlertController) {
+  constructor(private router:Router, private userService:UserService, public contactService:ContactService, private toastController: ToastController, private alertController: AlertController) {
     this.current_user = userService.get_current_user();
    }
 

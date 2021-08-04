@@ -21,19 +21,34 @@ export class UserService {
     return this.http.post('http://localhost:8000/register', formData);
   }
 
+  isAuthenticated(){
+    return this.get_current_user() ? true: false;
+  }
+
   get_current_user(){
     return JSON.parse(localStorage.getItem('currentUser'));//before: localStorage.getItem('currentUser')!
   }
 
-  update_lessor_phone_number(lessor_id,phone_number){
-    return this.http.patch("http://localhost:8000/lessor_phone_number/"+lessor_id,{phone_number});
+  update_lessor_phone_number(lessor_id,formData:object){
+    return this.http.patch("http://localhost:8000/lessor_phone_number/"+lessor_id,formData);
   }
 
-  update_lessor_picture(lessor_id,lessor_picture){
-    return this.http.patch("http://localhost:8000/lessor_picture/"+lessor_id,{lessor_picture});
+  updatePhoneNumber(phone_number:any)
+  {
+    let user = this.get_current_user();
+    user.phone_number = phone_number;
+    localStorage.setItem('currentUser', JSON.stringify(user));
   }
 
-  isAuthenticated(){
-    return this.get_current_user() ? true: false;
+  update_lessor_picture(lessor_id,formData:object){
+    return this.http.patch("http://localhost:8000/lessor_picture/"+lessor_id, formData);
   }
+
+  updateProfilePicture(picture:any)
+  {
+    let user = this.get_current_user();
+    user.lessor_picture = picture;
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  }
+
 }
