@@ -46,6 +46,7 @@ export class MyContactPage {
               console.log(err);
             });
             this.showMessage("Contact has been deleted");
+            
           }
         },
       ]

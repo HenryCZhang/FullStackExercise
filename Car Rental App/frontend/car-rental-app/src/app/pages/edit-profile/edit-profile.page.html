@@ -30,19 +30,22 @@
     <form>
 
       <div class="mb-3">
-        <label for="phone_number" class="form-label">Add/Change Phone Number:</label>
-        <input type="number" class="form-control" [(ngModel)]='phone_number' name="phone_number">
+        <label class="form-label">Change UserName:</label>
+        <input type="text" class="form-control" [(ngModel)]='first_name' name="first_name" placeholder="first name">
+        <input type="text" class="form-control" [(ngModel)]='last_name' name="last_name" placeholder="last name">
       </div>
-            
-      <ion-button color='primary' (click)='updatePhoneNumber()'>Change Phone Number</ion-button>  
 
       <div class="mb-3">
-        <label for="profile_picture" class="form-label">Profile Picture:</label>
+        <label for="phone_number" class="form-label">Change Phone Number:</label>
+        <input type="number" class="form-control" [(ngModel)]='phone_number' name="phone_number" placeholder="phone number">
+      </div>
+
+      <div class="mb-3">
+        <label for="profile_picture" class="form-label">Change Profile Picture:</label>
         <input type="file" class="form-control" (change)="onFileChange($event)" [(ngModel)]='profile_picture' name="profile_picture">
       </div>
-      
-      <ion-button color='primary' (click)='updateProfilePicture()'>Change Profile Picture</ion-button>  
 
+      <ion-button color='primary' (click)='updateProfile()'>Submit</ion-button> 
    </form>
 
   </ion-content>

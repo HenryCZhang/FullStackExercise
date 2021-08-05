@@ -12,13 +12,15 @@ export class EditProfilePage implements OnInit {
 
   current_user;
   phone_number;
+  first_name;
+  last_name;
+  email;
   profileForm;
 
   constructor(private userService:UserService,public toastController: ToastController,private formBuilder: FormBuilder,) {
     this.current_user = userService.get_current_user();
 
     this.profileForm = formBuilder.group({
-      // phone_number: ['', [Validators.required]],
       profile_picture: ['', [Validators.required]]
     }); 
   }
@@ -36,7 +38,6 @@ export class EditProfilePage implements OnInit {
 
   onFileChange(event:any) {  
     const file = event.target.files[0];
-    // this.profile_picture = file;
 
     this.profileForm.patchValue({
       profile_picture: file
@@ -50,15 +51,13 @@ export class EditProfilePage implements OnInit {
       let formData  = new FormData();
       formData.append("phone_number", this.phone_number);
       this.userService.update_lessor_phone_number(this.current_user.id,formData).subscribe((result)=>{
-        this.userService.updatePhoneNumber(this.phone_number);//todo
+        this.userService.updatePhoneNumber(this.phone_number);
         console.log(result);
-        this.showMessage('Updated phone number successful');
       },(err)=>{
         console.log(err);
         this.showMessage("Err! Failed to update phone number");
       });
     }else{
-      console.log('this.profileForm.value.phone_number.name is empty');
       console.log(this.phone_number);
     }
   }
@@ -69,12 +68,52 @@ export class EditProfilePage implements OnInit {
       formData.append("profile_picture", this.profileForm.value.profile_picture);
       this.userService.update_lessor_picture(this.current_user.id,formData).subscribe((result)=>{
         this.userService.updateProfilePicture(this.profileForm.value.profile_picture.name);
-        this.showMessage('Updated profile picture successful');
       },(err)=>{
         console.log(err);
         this.showMessage("Err! Failed to update profile picture");
       });
     }
+  }
+
+  updateUserName(){
+        //first name update
+        if(this.first_name!=null){
+          console.log(this.first_name);//for debugging
+          let formData  = new FormData();
+          formData.append("first_name", this.first_name);
+          this.userService.update_lessor_first_name(this.current_user.id,formData).subscribe((result)=>{
+            this.userService.updateFirstName(this.first_name);
+            console.log(result);
+          },(err)=>{
+            console.log(err);
+            this.showMessage("Err! Failed to update first_name");
+          });
+        }else{
+          console.log(this.first_name);
+        }
+
+        //last name update
+        if(this.last_name!=null){
+          console.log(this.last_name)//for debugging
+          let formData  = new FormData();
+          formData.append("last_name", this.last_name);
+          this.userService.update_lessor_last_name(this.current_user.id,formData).subscribe((result)=>{
+            this.userService.updateLastName(this.last_name);
+            console.log(result);
+          },(err)=>{
+            console.log(err);
+            this.showMessage("Err! Failed to update last_name");
+          });
+        }else{
+          console.log(this.last_name);
+        }
+  }
+
+  updateProfile(){
+    this.updatePhoneNumber();
+    this.updateProfilePicture();
+    this.updateUserName();
+    this.showMessage('Profile update successful');
   }
 
 }

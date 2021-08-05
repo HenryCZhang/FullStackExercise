@@ -32,7 +32,6 @@ export class UserService {
   update_lessor_phone_number(lessor_id,formData:object){
     return this.http.patch("http://localhost:8000/lessor_phone_number/"+lessor_id,formData);
   }
-
   updatePhoneNumber(phone_number:any)
   {
     let user = this.get_current_user();
@@ -40,10 +39,39 @@ export class UserService {
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
 
+  update_lessor_first_name(lessor_id,formData:object){
+    return this.http.patch("http://localhost:8000/lessor_first_name/"+lessor_id,formData);//todo backend
+  }
+  updateFirstName(first_name:any)
+  {
+    let user = this.get_current_user();
+    user.first_name=first_name;
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  }
+
+  update_lessor_last_name(lessor_id,formData:object){
+    return this.http.patch("http://localhost:8000/lessor_last_name/"+lessor_id,formData);//todo backend
+  }
+  updateLastName(last_name:any)
+  {
+    let user = this.get_current_user();
+    user.last_name=last_name;
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  }
+
+  update_lessor_email(lessor_id,formData:object){
+    return this.http.patch("http://localhost:8000/lessor_email/"+lessor_id,formData);//todo backend
+  }
+  updateEmail(email:any)
+  {
+    let user = this.get_current_user();
+    user.email=email;
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  }
+
   update_lessor_picture(lessor_id,formData:object){
     return this.http.patch("http://localhost:8000/lessor_picture/"+lessor_id, formData);
   }
-
   updateProfilePicture(picture:any)
   {
     let user = this.get_current_user();

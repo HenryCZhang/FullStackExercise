@@ -42,14 +42,14 @@
     <form [formGroup]='orderForm'>
       <ion-item>
         <ion-label position="stacked">Start Date:</ion-label>
-        <ion-input type="datetime-local" formControlName='start_date'></ion-input>
+        <ion-input type="datetime-local" formControlName='start_date' [(ngModel)]='start_date' name="start_date"></ion-input>
       </ion-item>
       <ion-item *ngIf="start_dateFormControl.touched && start_dateFormControl.errors?.required" color="danger">
         This field is required
       </ion-item>
       <ion-item>
         <ion-label position="stacked">End Date:</ion-label>
-        <ion-input type="datetime-local" formControlName='end_date'></ion-input>
+        <ion-input type="datetime-local" formControlName='end_date' [(ngModel)]='end_date' name="end_date"></ion-input>
       </ion-item>
       <ion-item *ngIf="end_dateFormControl.touched && end_dateFormControl.errors?.required" color="danger">
         This field is required
@@ -72,7 +72,6 @@
           </div>
         </ion-card-content>
         <ion-button color="dark" [hidden]='ownerRelation(car)' (click)='contactOwner(car)'>Contact Owner</ion-button>
-        <h1>please enter dates first before placing order</h1>
         <ion-button color="warning" (click)="placeOrder(car)" [disabled]='car.rented' [hidden]='ownerRelation(car)'>Place Order</ion-button>
       </ion-card>
     </ion-list> 

@@ -17,7 +17,9 @@ export class Tab1Page {
   cars:Car[];
   carID;
   orderForm;
-  current_user
+  current_user;
+  start_date;
+  end_date;
 
   constructor(private menu: MenuController, private carService:CarService,public toastController: ToastController, private alertController:AlertController,private builder:FormBuilder,private userService:UserService,private orderService:OrderService, private router:Router) { 
     //get current user
@@ -110,28 +112,33 @@ export class Tab1Page {
   }
 
   async placeOrder(car){
+    //dates guard condition
+    if(this.start_date!=null && this.end_date!=null){
 
-    let car_id=car.id;
-    this.orderForm.patchValue({
-      car_id: car_id
-    });  
+      let car_id=car.id;
+      this.orderForm.patchValue({
+        car_id: car_id
+      });  
 
-    //need guard condition when dates are not entered
-    car.rented = !car.rented;
+      //need guard condition when dates are not entered
+      car.rented = !car.rented;
 
-    this.carService.update_rented(car.id,car.rented).subscribe((result)=>{
-      console.log(result);
-    },(err)=>{
-      console.log(err);
-    })
-    this.router.navigate(['']);//auto refresh page to see changes - not working
-    this.orderService.add_order(this.orderForm.value).subscribe((result)=>{
-      console.log(result);
-      this.showMessage('Order has been placed');
-    },(err)=>{
-      console.log(err);
-      this.showMessage("Err! Order could not be placed");
-    })
+      this.carService.update_rented(car.id,car.rented).subscribe((result)=>{
+        console.log(result);
+      },(err)=>{
+        console.log(err);
+      })
+      this.router.navigate(['']);//auto refresh page to see changes - not working
+      this.orderService.add_order(this.orderForm.value).subscribe((result)=>{
+        console.log(result);
+        this.showMessage('Order has been placed');
+      },(err)=>{
+        console.log(err);
+        this.showMessage("Err! Order could not be placed");
+      })
+    }else{
+      this.showMessage('Please enter the start date and end date');
+    }
   }
 
   get  start_dateFormControl(){

@@ -251,10 +251,60 @@ app.patch('/lessor_phone_number/:id',multer({storage}).single('phone_number'),(r
     Lessor.findByPk(id).then((result)=>{
         console.log(result);
         result.phone_number = req.body.phone_number;
-        // result.phone_number = req.file ? req.file.filename : null ; //doesn't change DB value
         //save the update to the DB
         result.save().then(()=>{
             res.status(200).send(['lessor phone number update successful!']);
+        }).catch((err)=>{
+            res.status(400).send(err);
+        })
+    }).catch((err)=>{
+        res.status(400).send(err);
+    })
+})
+
+//Update first name by lessor ID
+app.patch('/lessor_first_name/:id',multer({storage}).single('first_name'),(req,res)=>{
+    let id = parseInt(req.params.id);
+    Lessor.findByPk(id).then((result)=>{
+        console.log(result);
+        result.first_name = req.body.first_name;
+        //save the update to the DB
+        result.save().then(()=>{
+            res.status(200).send(['lessor first_name update successful!']);
+        }).catch((err)=>{
+            res.status(400).send(err);
+        })
+    }).catch((err)=>{
+        res.status(400).send(err);
+    })
+})
+
+//Update last name by lessor ID
+app.patch('/lessor_last_name/:id',multer({storage}).single('last_name'),(req,res)=>{
+    let id = parseInt(req.params.id);
+    Lessor.findByPk(id).then((result)=>{
+        console.log(result);
+        result.last_name = req.body.last_name;
+        //save the update to the DB
+        result.save().then(()=>{
+            res.status(200).send(['lessor last_name update successful!']);
+        }).catch((err)=>{
+            res.status(400).send(err);
+        })
+    }).catch((err)=>{
+        res.status(400).send(err);
+    })
+})
+
+//Update email by lessor ID
+app.patch('/lessor_email/:id',multer({storage}).single('email'),(req,res)=>{
+    let id = parseInt(req.params.id);
+    Lessor.findByPk(id).then((result)=>{
+        console.log(result);
+        result.email = req.body.email;
+        //save the update to the DB
+        result.save().then(()=>{
+            res.status(200).send(['lessor email update successful!']);
         }).catch((err)=>{
             res.status(400).send(err);
         })
