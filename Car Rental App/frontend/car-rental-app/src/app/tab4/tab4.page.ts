@@ -20,6 +20,7 @@ export class Tab4Page {
   }
 
   ionViewWillEnter(){
+    console.log('did enter');
     this.current_user = this.userService.get_current_user();
     this.user_img_src = 'http://localhost:8000/images/'+this.current_user.lessor_picture;//user_picture src
     console.log(this.user_img_src)//testing

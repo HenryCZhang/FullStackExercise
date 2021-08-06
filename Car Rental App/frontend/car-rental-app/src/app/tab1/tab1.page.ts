@@ -17,7 +17,11 @@ export class Tab1Page {
   cars:Car[];
   carID;
   orderForm;
+  searchForm;
   current_user;
+  country;
+  city;
+  vehicle_type
   start_date;
   end_date;
 
@@ -25,25 +29,33 @@ export class Tab1Page {
     //get current user
     this.current_user = userService.get_current_user();
 
+    this.searchForm=builder.group({
+      country:['',[Validators.required]],
+      city:['',[Validators.required]],
+      vehicle_type:['',[Validators.required]],
+      start_date:['',[Validators.required]],
+      end_date:['',[Validators.required]],
+    })
+
     this.orderForm = builder.group({
       car_id:[],///this.car.id
       client_firstname:[`${userService.get_current_user().first_name}`],
       client_lastname:[`${userService.get_current_user().last_name}`],
       client_email:[`${userService.get_current_user().email}`],
       client_picture:[`${userService.get_current_user().lessor_picture}`],
-      start_date:['',[Validators.required]],
-      end_date:['',[Validators.required]],
+      start_date:['',[Validators.required]],//patch this.start_date
+      end_date:['',[Validators.required]],//patch this.end_date
     })
   }
 
-  //get all the cars in the DB
-  ionViewWillEnter(){
-    this.carService.get_car_available().subscribe((result)=>{
-      this.cars=result;
-    },(err)=>{
-      console.log(err);
-    });
-  }
+  //get all the cars in the DB where 'rented = false'
+  // ionViewWillEnter(){
+  //   this.carService.get_car_available().subscribe((result)=>{
+  //     this.cars=result;
+  //   },(err)=>{
+  //     console.log(err);
+  //   });
+  // }
 
   openFirst() {
     this.menu.enable(true, 'first');
@@ -117,8 +129,11 @@ export class Tab1Page {
 
       let car_id=car.id;
       this.orderForm.patchValue({
-        car_id: car_id
+        car_id: car_id,
+        start_date:this.start_date,
+        end_date:this.end_date
       });  
+      
 
       //need guard condition when dates are not entered
       car.rented = !car.rented;
@@ -138,6 +153,25 @@ export class Tab1Page {
       })
     }else{
       this.showMessage('Please enter the start date and end date');
+    }
+  }
+
+  //Todo
+  searchCar(){
+    if(this.country==null){
+      this.showMessage("please enter the country");
+    }else if(this.city == null){
+      this.showMessage("please enter the city");
+    }else if(this.vehicle_type == null){
+      this.showMessage("please enter the type");
+    }//else if dates...
+    
+    else{
+    this.carService.get_car_search_filter(this.searchForm.value).subscribe((result)=>{
+      this.cars=result;
+    },(err)=>{
+      console.log(err);
+    });
     }
   }
 

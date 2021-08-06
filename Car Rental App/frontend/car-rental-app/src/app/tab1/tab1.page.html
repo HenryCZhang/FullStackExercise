@@ -10,10 +10,11 @@
 <ion-content [fullscreen]="true">
   <img src='../../assets/Games-Road-Trip-Road96-1.jpeg' class='headimg'>
 
+  <form [formGroup]='searchForm'>
     <ion-item>
       <ion-icon name="earth-outline" slot="start"></ion-icon>
       <ion-label>Country</ion-label>
-      <ion-select placeholder="Select One">
+      <ion-select placeholder="Select One" formControlName='country' [(ngModel)]='country' name="country">
         <ion-select-option value="canada">Canada</ion-select-option>
         <ion-select-option value="us">US</ion-select-option>
       </ion-select>
@@ -22,7 +23,7 @@
     <ion-item>
       <ion-icon name="location-outline" slot="start"></ion-icon>
       <ion-label>City</ion-label>
-      <ion-select placeholder="Select One">
+      <ion-select placeholder="Select One" formControlName='city' [(ngModel)]='city' name="city">
         <ion-select-option value="toronto">Toronto</ion-select-option>
         <ion-select-option value="london">London</ion-select-option>
         <ion-select-option value="calgory">Calgory</ion-select-option>
@@ -32,14 +33,13 @@
     <ion-item>
       <ion-icon name='car-outline' slot="start"></ion-icon>
       <ion-label>Vehicle Type:</ion-label>
-      <ion-select placeholder="Select One">
+      <ion-select placeholder="Select One" formControlName='vehicle_type' [(ngModel)]='vehicle_type' name="vehicle_type">
         <ion-select-option value="civic">Civic</ion-select-option>
         <ion-select-option value="suv">SUV</ion-select-option>
         <ion-select-option value="sports">Sports</ion-select-option>
       </ion-select>
     </ion-item> 
 
-    <form [formGroup]='orderForm'>
       <ion-item>
         <ion-label position="stacked">Start Date:</ion-label>
         <ion-input type="datetime-local" formControlName='start_date' [(ngModel)]='start_date' name="start_date"></ion-input>
@@ -54,9 +54,9 @@
       <ion-item *ngIf="end_dateFormControl.touched && end_dateFormControl.errors?.required" color="danger">
         This field is required
       </ion-item>
-    </form>
+  </form>
 
-    <ion-button color='dark'>Search (no function yet)</ion-button>  
+    <ion-button color='dark' (click)='searchCar()'>Search (no function yet)</ion-button>  
 
     <ion-list *ngFor="let car of cars" >
       <ion-card>

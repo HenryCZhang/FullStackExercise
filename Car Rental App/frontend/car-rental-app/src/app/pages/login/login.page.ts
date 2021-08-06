@@ -12,6 +12,7 @@ import { ToastController } from '@ionic/angular';
 export class LoginPage implements OnInit {
 
   loginForm;
+  // public userLoggedIn = new EventEmitter;
 
   constructor(private service:UserService, private formBuilder: FormBuilder,private router:Router,public toastController: ToastController) {
     this.loginForm = formBuilder.group({

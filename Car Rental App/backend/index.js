@@ -142,12 +142,16 @@ app.get('/car/filter',(req,res)=>{
     let data={
         where:{
             //availibility condition
+            country:req.body.country,
+            city:req.body.city,
+            type:req.body.vehicle_type,
+            //dates filter
         }
     }
     Car.findAll(data).then((result)=>{
         res.status(200).send(result);
     }).catch((err)=>{
-        res.status(500).send(err);
+        res.status(500).send(err);//some errs from browser
     })
 })
 
