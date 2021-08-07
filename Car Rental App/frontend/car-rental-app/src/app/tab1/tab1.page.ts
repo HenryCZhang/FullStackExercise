@@ -30,9 +30,9 @@ export class Tab1Page {
     this.current_user = userService.get_current_user();
 
     this.searchForm=builder.group({
-      country:['',[Validators.required]],
-      city:['',[Validators.required]],
-      vehicle_type:['',[Validators.required]],
+      country:[''],
+      city:[''],
+      vehicle_type:[''],
       start_date:['',[Validators.required]],
       end_date:['',[Validators.required]],
     })
@@ -49,13 +49,13 @@ export class Tab1Page {
   }
 
   //get all the cars in the DB where 'rented = false'
-  // ionViewWillEnter(){
-  //   this.carService.get_car_available().subscribe((result)=>{
-  //     this.cars=result;
-  //   },(err)=>{
-  //     console.log(err);
-  //   });
-  // }
+  ionViewWillEnter(){
+    this.carService.get_car_available().subscribe((result)=>{
+      this.cars=result;
+    },(err)=>{
+      console.log(err);
+    });
+  }
 
   openFirst() {
     this.menu.enable(true, 'first');
@@ -78,7 +78,7 @@ export class Tab1Page {
   async showMessage(message) {
     const toast = await this.toastController.create({
       message: message,
-      duration: 2000
+      duration: 1000
     });
     toast.present();
   }
@@ -158,21 +158,21 @@ export class Tab1Page {
 
   //Todo
   searchCar(){
-    if(this.country==null){
-      this.showMessage("please enter the country");
-    }else if(this.city == null){
-      this.showMessage("please enter the city");
-    }else if(this.vehicle_type == null){
-      this.showMessage("please enter the type");
-    }//else if dates...
+    // if(this.country==null){
+    //   this.showMessage("please enter the country");
+    // }else if(this.city == null){
+    //   this.showMessage("please enter the city");
+    // }else if(this.vehicle_type == null){
+    //   this.showMessage("please enter the type");
+    // }//else if dates...
     
-    else{
-    this.carService.get_car_search_filter(this.searchForm.value).subscribe((result)=>{
+  
+    this.carService.get_car_available(this.searchForm.value).subscribe((result)=>{
       this.cars=result;
     },(err)=>{
       console.log(err);
     });
-    }
+    
   }
 
   get  start_dateFormControl(){

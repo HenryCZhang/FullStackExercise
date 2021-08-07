@@ -1,4 +1,5 @@
 const express = require('express');
+const { Op } = require("sequelize");
 const app = express();
 const config = require('./config');
 const Car = require('./models/car');
@@ -9,6 +10,7 @@ const cors = require('cors');
 const multer = require('multer');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+
 
 
 app.use(cors());//allow Angular to access the node js
@@ -130,28 +132,39 @@ app.get('/car_available',(req,res)=>{
         },
         include: Lessor
     }
-    Car.findAll(data).then((result)=>{
-        res.status(200).send(result);
-    }).catch((err)=>{
-        res.status(500).send(err);
-    })
-})
 
-//find cars available - based on dates
-app.get('/car/filter',(req,res)=>{
-    let data={
-        where:{
-            //availibility condition
-            country:req.body.country,
-            city:req.body.city,
-            type:req.body.vehicle_type,
-            //dates filter
-        }
+    console.log(req.query);
+
+    if(req.query.city && req.query.city !== 'undefined')
+    {
+        data.where.city = req.query.city;     
     }
+
+    if(req.query.country && req.query.country !== 'undefined')
+    {
+        data.where.country = req.query.country;     
+    }
+
+    if(req.query.vehicle_type && req.query.vehicle_type !== 'undefined')
+    {
+        data.where.type = req.query.vehicle_type;     
+    }
+
+    if(req.query.start_date && req.query.start_date !== 'undefined')
+    {
+        data.where.start_date = {[Op.gte]: req.query.start_date};     
+    }
+
+    if(req.query.end_date && req.query.end_date !== 'undefined')
+    {
+        data.where.end_date = {[Op.lte]: req.query.end_date};     
+    }
+
     Car.findAll(data).then((result)=>{
         res.status(200).send(result);
     }).catch((err)=>{
-        res.status(500).send(err);//some errs from browser
+
+        res.status(500).send(err);
     })
 })
 
@@ -162,8 +175,12 @@ app.get('/car_lessor/:id',(req,res)=>{
         where:{
             lessor_id: lessor_id 
         },
+        order: [
+            ['id', 'DESC']
+        ],
         include: Order //business tab: display client info
     }
+    //{order: [[sequelize.fn('max', sequelize.col('id')), 'DESC']]}
     Car.findAll(data).then((result)=>{
         res.status(200).send(result);
     }).catch((err)=>{

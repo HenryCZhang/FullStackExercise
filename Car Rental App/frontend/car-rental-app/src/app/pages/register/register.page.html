@@ -26,7 +26,7 @@
     <form [formGroup]="registerForm">
       <div class="mb-3">
           <label class="form-label">First Name</label>
-          <input type="text" class="form-control" formControlName="first_name">
+          <input type="text" class="form-control" formControlName="first_name" [(ngModel)]='first_name' name="first_name">
       </div>
       <ion-item *ngIf="first_nameFormControl.touched && first_nameFormControl.errors?.required" color="danger">
         This field is required
@@ -34,7 +34,7 @@
   
       <div class="mb-3">
           <label class="form-label">Last Name</label>
-          <input type="text" class="form-control" formControlName="last_name">
+          <input type="text" class="form-control" formControlName="last_name" [(ngModel)]='last_name' name="last_name">
       </div>
       <ion-item *ngIf="last_nameFormControl.touched && last_nameFormControl.errors?.required" color="danger">
         This field is required
@@ -42,7 +42,7 @@
   
       <div class="mb-3">
           <label class="form-label">Email address</label>
-          <input type="email" class="form-control" formControlName="email">
+          <input type="email" class="form-control" formControlName="email" [(ngModel)]='email' name="email">
       </div>
       <ion-item *ngIf="emailFormControl.touched && emailFormControl.errors?.required" color="danger">
         This field is required
@@ -74,23 +74,23 @@
    </form>
 
    <!--Contact Table-->
-   <form [formGroup]="registerForm_contact">
+   <!-- <form [formGroup]="registerForm_contact">
     <div class="mb-3">
         <label class="form-label">First Name</label>
-        <input type="text" class="form-control" formControlName="first_name">
+        <input type="text" class="form-control" formControlName="first_name" [(ngModel)]='first_name' name="first_name">
     </div>
 
     <div class="mb-3">
         <label class="form-label">Last Name</label>
-        <input type="text" class="form-control" formControlName="last_name">
+        <input type="text" class="form-control" formControlName="last_name" [(ngModel)]='last_name' name="last_name">
     </div>
 
     <div class="mb-3">
         <label class="form-label">Email address</label>
-        <input type="email" class="form-control" formControlName="email">
+        <input type="email" class="form-control" formControlName="email" [(ngModel)]='email' name="email">
     </div>
     
     <button type="submit" class="btn btn-primary" (click)="addContact()" >Add Contact</button>
- </form>
+ </form> -->
   </ion-content>
 </div>

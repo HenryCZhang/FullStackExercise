@@ -13,6 +13,9 @@ export class RegisterPage implements OnInit {
 
   registerForm;
   registerForm_contact;
+  first_name;
+  last_name;
+  email;
    
   constructor(private service:UserService,private contactService:ContactService ,private formBuilder: FormBuilder,private router:Router) {
     this.registerForm = formBuilder.group({
@@ -23,20 +26,11 @@ export class RegisterPage implements OnInit {
       lessor_picture: ['', [Validators.required]]
     }); 
 
-    //*--------------comfirm password - particially working ----------------*/
-    // this.registerForm = formBuilder.group({
-    //   first_name: ['', Validators.required],
-    //   last_name: ['', Validators.required],
-    //   email: ['', Validators.required],
-    //   password: ['', Validators.compose([Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,12}$')])],
-    //   confirmPassword: [''],
-    // }, {validator: this.matchingPasswords('password', 'confirmPassword')});
-
     //for contact table
     this.registerForm_contact = formBuilder.group({
-      first_name: ['', [Validators.required]],
-      last_name: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      first_name: [''],
+      last_name: [''],
+      email: [''],
     });
   }
 
@@ -77,10 +71,17 @@ export class RegisterPage implements OnInit {
       alert('Register failed! ');
       console.log(err);
     });
+
+    this.addContact();
   }
 
   addContact(){
     //create a new contact in the contact table
+    this.registerForm_contact.patchValue({
+      first_name:this.first_name,
+      last_name:this.last_name,
+      email:this.email
+    });  
     let contact_formData = this.registerForm_contact.value;
     this.contactService.add_contact(contact_formData).subscribe((result) => {
       alert('Created contact successful!');

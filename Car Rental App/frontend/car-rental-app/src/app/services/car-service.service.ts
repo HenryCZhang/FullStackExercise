@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Car } from '../interfaces/car';
 
@@ -14,13 +14,14 @@ export class CarService {
     return this.http.get<Car[]>("http://localhost:8000/car");
   }
 
-  get_car_available():Observable<Car[]>{
-    return this.http.get<Car[]>("http://localhost:8000/car_available");
+  get_car_available(searchData:any = {}):Observable<Car[]>{
+    const opts = { params: new HttpParams(searchData) };
+    return this.http.get<Car[]>("http://localhost:8000/car_available", {params: searchData});
   }
   
-  get_car_search_filter(searchData:object):Observable<Car[]>{
-    return this.http.get<Car[]>("http://localhost:8000/car/filter",searchData);
-  }
+  // get_car_search_filter(searchData:object):Observable<Car[]>{
+  //   return this.http.get<Car[]>("http://localhost:8000/car/filter",searchData);
+  // }
 
   get_car_byLessor(lessor_id):Observable<Car[]>{
     return this.http.get<Car[]>("http://localhost:8000/car_lessor/"+lessor_id);
