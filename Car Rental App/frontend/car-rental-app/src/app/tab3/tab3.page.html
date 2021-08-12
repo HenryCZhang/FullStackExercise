@@ -16,8 +16,7 @@
           <ul>
             <h3>{{car.model}}</h3>
             <li><p>Return Location: <br>{{car.return_location}}</p></li>
-            <li><p>Return Date: {{car.end_date}}</p></li>
-            <h3>Car ID: {{car.id}} (for testing)</h3>
+            <li><p>Return Date: {{car.end_date | date}}</p></li>
           </ul>
         </div>
         <div class="col">

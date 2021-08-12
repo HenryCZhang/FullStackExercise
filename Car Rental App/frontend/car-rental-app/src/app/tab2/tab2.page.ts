@@ -85,10 +85,8 @@ export class Tab2Page {
             order_car.rented = !order_car.rented;
             this.carService.update_rented(order_car.id,order_car.rented).subscribe((result)=>{
               console.log(result);
-              this.showMessage('Car rented update success');
             },(err)=>{
               console.log(err);
-              this.showMessage("Err! Car rented update failed");
             })
           }
         },

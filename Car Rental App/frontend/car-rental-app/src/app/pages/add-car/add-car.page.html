@@ -62,7 +62,7 @@
       <ion-item>
         <ion-icon name="location-outline" slot="start"></ion-icon>
         <ion-label position="stacked">Return Location:</ion-label>
-        <ion-input formControlName="return_location" placeholder="street number"></ion-input>
+        <ion-input formControlName="return_location" placeholder="street number/city/postal code"></ion-input>
       </ion-item>
       <ion-item *ngIf="return_locationFormControl.touched && return_locationFormControl.errors?.required" color="danger">
         This field is required
@@ -72,9 +72,9 @@
         <ion-icon name='car-outline' slot="start"></ion-icon>
         <ion-label>Vehicle Type:</ion-label>
         <ion-select placeholder="Select One" formControlName="type">
-          <ion-select-option value="civic">Civic</ion-select-option>
-          <ion-select-option value="suv">SUV</ion-select-option>
-          <ion-select-option value="sports">Sports</ion-select-option>
+          <ion-select-option value="Civic">Civic</ion-select-option>
+          <ion-select-option value="SUV">SUV</ion-select-option>
+          <ion-select-option value="Sports">Sports</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item *ngIf="typeFormControl.touched && typeFormControl.errors?.required" color="danger">
