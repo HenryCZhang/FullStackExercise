@@ -13,7 +13,7 @@ const saltRounds = 10;
 
 
 
-app.use(cors());//allow Angular to access the node js
+app.use(cors());//allow Angular to access the Node.js
 app.use(express.json())//middleware
 app.use('/images', express.static('uploads')); //making the uploads folder publicly accessible
 

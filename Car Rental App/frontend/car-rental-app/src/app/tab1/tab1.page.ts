@@ -158,14 +158,6 @@ export class Tab1Page {
 
   //Todo
   searchCar(){
-    // if(this.country==null){
-    //   this.showMessage("please enter the country");
-    // }else if(this.city == null){
-    //   this.showMessage("please enter the city");
-    // }else if(this.vehicle_type == null){
-    //   this.showMessage("please enter the type");
-    // }//else if dates...
-    
   
     this.carService.get_car_available(this.searchForm.value).subscribe((result)=>{
       this.cars=result;
